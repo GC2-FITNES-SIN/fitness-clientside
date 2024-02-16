@@ -26,7 +26,7 @@ const Profile = () => {
 							marginBottom: 10,
 						}}
 					>
-						<TextCustom $color={"#84c2b3"} $fontSize={"17.5"}>
+						<TextCustom $color={"#84c2b3"} $fontSize={"17.5px"}>
 							180 cm
 						</TextCustom>
 						<TextCustom>Height</TextCustom>

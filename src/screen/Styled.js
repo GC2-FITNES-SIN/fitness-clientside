@@ -10,7 +10,7 @@ export const Container = styled.SafeAreaView`
 	background: #fff;
 `;
 export const ContainerFlexSameFlex = styled.View`
-	flex: 1;
+	flex: ${(props) => (props.$flex ? props.$flex : "1")};
 	flex-direction: ${(props) => (props.$column ? "column" : "row")};
 	gap: ${(props) => (props.$gap ? props.$gap : "0px")};
 	background: ${(props) => (props.$backgroundColor ? props.$backgroundColor : "white")};

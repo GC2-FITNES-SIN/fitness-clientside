@@ -8,7 +8,6 @@ const Home = () => {
 		<View>
 			<Container $padding={"0 7.5%"} flex={2}>
 				<Text>Home 123</Text>
-				<Button>Test</Button>
 			</Container>
 		</View>
 	);
