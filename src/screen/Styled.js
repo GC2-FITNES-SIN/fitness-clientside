@@ -17,7 +17,7 @@ export const ContainerFlexSameFlex = styled.View`
 	box-shadow: ${(props) => (props.$boxShadow ? props.$boxShadow : "none")};
 	justify-content: ${(props) => (props.$justifyContent ? props.$justifyContent : "flex-start")};
 	align-items: ${(props) => (props.$alignItems ? props.$alignItems : "flex-start")};
-	padding: 10px;
+	padding: ${(props) => (props.$padding ? props.$padding : "10px")};
 	width: ${(props) => (props.$width ? props.$width : "100%")};
 	height: ${(props) => (props.$height ? props.$height : "auto")};
 	border-radius: ${(props) => (props.$borderRadius ? props.$borderRadius : "0px")};
