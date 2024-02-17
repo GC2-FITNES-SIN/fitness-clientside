@@ -105,7 +105,24 @@ const Profile = () => {
 				</ContainerFlexSameFlex>
 
 				{/* BMI Section */}
-				<ContainerFlexSameFlex $gap={"15px"} $column>
+				<ContainerFlexSameFlex
+					$gap={"15px"}
+					$column
+					style={{
+						shadowColor: "#000000",
+						shadowOffset: {
+							width: 0,
+							height: 9,
+						},
+						shadowOpacity: 0.22,
+						shadowRadius: 10.24,
+						elevation: 13,
+						marginTop: 10,
+						marginBottom: 10,
+					}}
+					$borderRadius={"16px"}
+					$padding={"25px"}
+				>
 					<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
 						Overweight
 					</TextCustom>
@@ -115,70 +132,87 @@ const Profile = () => {
 				</ContainerFlexSameFlex>
 
 				{/* details Section */}
-
-				<ContainerFlexSameFlex $column>
-					<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
-						Name
-					</TextCustom>
-					<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-						Stefani Wong
-					</TextCustom>
-				</ContainerFlexSameFlex>
-				<ContainerFlexSameFlex $column>
-					<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
-						Username
-					</TextCustom>
-					<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-						Stefani Wong
-					</TextCustom>
-				</ContainerFlexSameFlex>
-				<ContainerFlexSameFlex $column>
-					<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
-						Email
-					</TextCustom>
-					<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-						StefaniWong@gmail.com
-					</TextCustom>
-				</ContainerFlexSameFlex>
-				<ContainerFlexSameFlex $column>
-					<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
-						Phone Number
-					</TextCustom>
-					<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-						0812xxxxx
-					</TextCustom>
-				</ContainerFlexSameFlex>
-				<ContainerFlexSameFlex $column>
-					<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
-						Gender
-					</TextCustom>
-					<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-						Non Biner
-					</TextCustom>
-				</ContainerFlexSameFlex>
-				<ContainerFlexSameFlex $column>
-					<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
-						Weight
-					</TextCustom>
-					<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-						70 Kg
-					</TextCustom>
-				</ContainerFlexSameFlex>
-				<ContainerFlexSameFlex $column>
-					<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
-						Height
-					</TextCustom>
-					<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-						168
-					</TextCustom>
-				</ContainerFlexSameFlex>
-				<ContainerFlexSameFlex $column>
-					<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
-						Weight
-					</TextCustom>
-					<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-						70 Kg
-					</TextCustom>
+				<ContainerFlexSameFlex
+					style={{
+						shadowColor: "#000000",
+						shadowOffset: {
+							width: 0,
+							height: 9,
+						},
+						shadowOpacity: 0.22,
+						shadowRadius: 10.24,
+						elevation: 13,
+						marginTop: 10,
+						marginBottom: 10,
+					}}
+					$column
+					$borderRadius={"16px"}
+					$padding={"25px"}
+				>
+					<ContainerFlexSameFlex $column>
+						<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
+							Name
+						</TextCustom>
+						<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
+							Stefani Wong
+						</TextCustom>
+					</ContainerFlexSameFlex>
+					<ContainerFlexSameFlex $column>
+						<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
+							Username
+						</TextCustom>
+						<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
+							Stefani Wong
+						</TextCustom>
+					</ContainerFlexSameFlex>
+					<ContainerFlexSameFlex $column>
+						<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
+							Email
+						</TextCustom>
+						<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
+							StefaniWong@gmail.com
+						</TextCustom>
+					</ContainerFlexSameFlex>
+					<ContainerFlexSameFlex $column>
+						<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
+							Phone Number
+						</TextCustom>
+						<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
+							0812xxxxx
+						</TextCustom>
+					</ContainerFlexSameFlex>
+					<ContainerFlexSameFlex $column>
+						<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
+							Gender
+						</TextCustom>
+						<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
+							Non Biner
+						</TextCustom>
+					</ContainerFlexSameFlex>
+					<ContainerFlexSameFlex $column>
+						<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
+							Weight
+						</TextCustom>
+						<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
+							70 Kg
+						</TextCustom>
+					</ContainerFlexSameFlex>
+					<ContainerFlexSameFlex $column>
+						<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
+							Height
+						</TextCustom>
+						<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
+							168
+						</TextCustom>
+					</ContainerFlexSameFlex>
+					<ContainerFlexSameFlex $column>
+						<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
+							Weight
+						</TextCustom>
+						<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
+							70 Kg
+						</TextCustom>
+					</ContainerFlexSameFlex>
 				</ContainerFlexSameFlex>
 				<Button $borderRadius={"50px"} $backgroundColor={"#84c2b3"}>
 					<TextCustom $color={"white"} $textAlign={"center"}>
