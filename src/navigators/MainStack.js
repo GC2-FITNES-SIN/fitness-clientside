@@ -10,7 +10,7 @@ const MainStack = () => {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator initialRouteName="ButtomTab">
-				<Stack.Screen name="Profile" component={Profile} />
+				<Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
 				<Stack.Screen name="Home" component={Home} />
 				<Stack.Screen name="ButtomTab" component={BottomNavigator} options={{ headerShown: false }} />
 			</Stack.Navigator>
