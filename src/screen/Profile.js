@@ -37,16 +37,14 @@ const Profile = () => {
 						$borderRadius={"16px"}
 						$backgroundColor={"#fff"}
 						style={{
-							shadowColor: "#000000",
+							shadowColor: "#000",
 							shadowOffset: {
 								width: 0,
-								height: 9,
+								height: 1,
 							},
 							shadowOpacity: 0.22,
-							shadowRadius: 10.24,
-							elevation: 13,
-							marginTop: 10,
-							marginBottom: 10,
+							shadowRadius: 2.22,
+							elevation: 3,
 						}}
 					>
 						<TextCustom $color={"#84c2b3"} $fontSize={"15px"}>
@@ -61,16 +59,14 @@ const Profile = () => {
 						$borderRadius={"16px"}
 						$backgroundColor={"#fff"}
 						style={{
-							shadowColor: "#000000",
+							shadowColor: "#000",
 							shadowOffset: {
 								width: 0,
-								height: 9,
+								height: 1,
 							},
 							shadowOpacity: 0.22,
-							shadowRadius: 10.24,
-							elevation: 13,
-							marginTop: 10,
-							marginBottom: 10,
+							shadowRadius: 2.22,
+							elevation: 3,
 						}}
 					>
 						<TextCustom $color={"#84c2b3"} $fontSize={"15px"}>
@@ -85,16 +81,14 @@ const Profile = () => {
 						$borderRadius={"16px"}
 						$backgroundColor={"#fff"}
 						style={{
-							shadowColor: "#000000",
+							shadowColor: "#000",
 							shadowOffset: {
 								width: 0,
-								height: 9,
+								height: 1,
 							},
 							shadowOpacity: 0.22,
-							shadowRadius: 10.24,
-							elevation: 13,
-							marginTop: 10,
-							marginBottom: 10,
+							shadowRadius: 2.22,
+							elevation: 3,
 						}}
 					>
 						<TextCustom $color={"#84c2b3"} $fontSize={"15px"}>
@@ -109,14 +103,14 @@ const Profile = () => {
 					$gap={"15px"}
 					$column
 					style={{
-						shadowColor: "#000000",
+						shadowColor: "#000",
 						shadowOffset: {
 							width: 0,
-							height: 9,
+							height: 1,
 						},
 						shadowOpacity: 0.22,
-						shadowRadius: 10.24,
-						elevation: 13,
+						shadowRadius: 2.22,
+						elevation: 3,
 						marginTop: 10,
 						marginBottom: 10,
 					}}
@@ -134,14 +128,14 @@ const Profile = () => {
 				{/* details Section */}
 				<ContainerFlexSameFlex
 					style={{
-						shadowColor: "#000000",
+						shadowColor: "#000",
 						shadowOffset: {
 							width: 0,
-							height: 9,
+							height: 1,
 						},
 						shadowOpacity: 0.22,
-						shadowRadius: 10.24,
-						elevation: 13,
+						shadowRadius: 2.22,
+						elevation: 3,
 						marginTop: 10,
 						marginBottom: 10,
 					}}
@@ -214,7 +208,22 @@ const Profile = () => {
 						</TextCustom>
 					</ContainerFlexSameFlex>
 				</ContainerFlexSameFlex>
-				<Button $borderRadius={"50px"} $backgroundColor={"#84c2b3"}>
+				<Button
+					$borderRadius={"50px"}
+					$backgroundColor={"#84c2b3"}
+					style={{
+						shadowColor: "#000",
+						shadowOffset: {
+							width: 0,
+							height: 1,
+						},
+						shadowOpacity: 0.22,
+						shadowRadius: 2.22,
+						elevation: 3,
+						marginTop: 5,
+						marginBottom: 5,
+					}}
+				>
 					<TextCustom $color={"white"} $textAlign={"center"}>
 						Logout
 					</TextCustom>

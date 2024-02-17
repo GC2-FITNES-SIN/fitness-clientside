@@ -30,6 +30,7 @@ const BottomNavigator = () => {
 				},
 				tabBarActiveTintColor: "tomato",
 				tabBarInactiveTintColor: "gray",
+				headerShown: false,
 			})}
 		>
 			<Tab.Screen name="Home" component={Home} />
