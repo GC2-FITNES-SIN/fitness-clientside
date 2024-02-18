@@ -27,7 +27,7 @@ const Register = () => {
 				</TextInput>
 			</ContainerFlexSameFlex>
 			<ContainerFlexSameFlex $column $gap={"10px"} $justifyContent={"center"}>
-				<Button $backgroundColor={"grey"} $height={"60px"} $borderRadius={"99px"} $padding={"20px 0px 0px 0px"}
+				<Button $backgroundColor={"#84c2b3"} $height={"60px"} $borderRadius={"99px"} $padding={"20px 0px 0px 0px"}
 					style={{
 						shadowColor: "#000",
 						shadowOffset: {

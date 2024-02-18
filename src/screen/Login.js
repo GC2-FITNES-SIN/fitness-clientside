@@ -4,7 +4,7 @@ import { Button, Container, ContainerFlexSameFlex, TextCustom, TextInput } from 
 
 const Login = () => {
 	return (
-		<Container $padding={"20px"}>
+		<Container $padding={"20px"} >
 			<ContainerFlexSameFlex $column $justifyContent={"flex-end"}>
 				<TextCustom $fontSize={"20px"} $color={"#1D1617"}>
 					Hey there,
@@ -22,7 +22,7 @@ const Login = () => {
 				</TextInput>
 			</ContainerFlexSameFlex>
 			<ContainerFlexSameFlex $column $gap={"10px"} $justifyContent={"center"}>
-				<Button $backgroundColor={"grey"} $height={"60px"} $borderRadius={"99px"} $padding={"20px 0px 0px 0px"}
+				<Button $backgroundColor={"#84c2b3"} $height={"60px"} $borderRadius={"99px"} $padding={"20px 0px 0px 0px"}
 				style={{
 					shadowColor: "#000",
 					shadowOffset: {
