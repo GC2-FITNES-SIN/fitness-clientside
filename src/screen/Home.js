@@ -3,7 +3,6 @@ import { Image } from "react-native";
 import { Container, Button, ScrollView, ContainerFlexSameFlex, TextCustom } from "./Styled";
 import PieChartCustom from "../components/PieChartCustom";
 import OverlayImage from "../components/OverlayImage";
-import CarouselCustom from "../components/CarouselCustom";
 
 const Home = () => {
 	return (
@@ -87,14 +86,6 @@ const Home = () => {
 						</ContainerFlexSameFlex>
 					</ContainerFlexSameFlex>
 				</ContainerFlexSameFlex>
-
-				{/* Carousel */}
-				{/* <ContainerFlexSameFlex>
-					<TextCustom $textAlign={"left"} $fontWeight={"bold"} $fontSize={"20px"}>
-						Test
-					</TextCustom>
-					<CarouselCustom data={[1, 2, 3]} />
-				</ContainerFlexSameFlex> */}
 			</Container>
 		</ScrollView>
 	);

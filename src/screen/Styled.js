@@ -6,7 +6,7 @@ export const Container = styled.SafeAreaView`
 	align-items: center;
 	justify-content: center;
 	padding: ${(props) => (props.$padding ? props.$padding : "0")};
-	gap: 5px;
+	gap: ${(props) => (props.$gap ? props.$gap : "0")};
 	background: ${(props) => (props.$backgroundColor ? props.$backgroundColor : "white")};
 `;
 export const ContainerFlexSameFlex = styled.View`
