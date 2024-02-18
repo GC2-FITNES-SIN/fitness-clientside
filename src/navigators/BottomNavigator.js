@@ -28,9 +28,17 @@ const BottomNavigator = () => {
 
 					return <Ionicons name={iconName} size={size} color={color} />;
 				},
-				tabBarActiveTintColor: "tomato",
-				tabBarInactiveTintColor: "gray",
+				tabBarActiveTintColor: "#bd54eb",
+				tabBarInactiveTintColor: "#fff",
 				headerShown: false,
+				tabBarInactiveBackgroundColor: "#1b1b1d",
+				tabBarActiveBackgroundColor: "#1b1b1d",
+				tabBarStyle: {
+					borderColor: "unset",
+					border: "unset",
+					backgroundColor: "#1b1b1d",
+				},
+				// tabBarShowLabel: false,
 			})}
 		>
 			<Tab.Screen name="Home" component={Home} />
