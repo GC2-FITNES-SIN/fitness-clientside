@@ -35,6 +35,7 @@ export const Button = styled.TouchableOpacity`
 	border: ${(props) => (props.$border ? props.$border : "none")};
 	border-radius: ${(props) => (props.$borderRadius ? props.$borderRadius : "0px")};
 	width: ${(props) => (props.$width ? props.$width : "100%")};
+	height: ${(props) => (props.$height ? props.$height : "auto")};
 `;
 export const TextCustom = styled.Text`
 	font-size: ${(props) => (props.$fontSize ? props.$fontSize : "15px")};
@@ -49,3 +50,14 @@ export const ProfileRounded = styled.Image`
 	width: 70px;
 	height: 70px;
 `;
+
+export const TextInput = styled.TextInput`
+	width: ${(props) => (props.$width ? props.$width : "100%")};
+	height: ${(props) => (props.$height ? props.$height : "auto")};
+	background: ${(props) => (props.$backgroundColor ? props.$backgroundColor : "white")};
+	border-radius: ${(props) => (props.$borderRadius ? props.$borderRadius : "0px")};
+	padding: ${(props) => (props.$padding ? props.$padding : "10px")};
+	font-size: ${(props) => (props.$fontSize ? props.$fontSize : "15px")};
+	color: ${(props) => (props.$color ? props.$color : "black")};
+	font-weight: ${(props) => (props.$fontWeight ? props.$fontWeight : "normal")};
+`
