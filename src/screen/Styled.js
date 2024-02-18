@@ -13,7 +13,7 @@ export const ContainerFlexSameFlex = styled.View`
 	flex: ${(props) => (props.$flex ? props.$flex : "1")};
 	flex-direction: ${(props) => (props.$column ? "column" : "row")};
 	gap: ${(props) => (props.$gap ? props.$gap : "0px")};
-	background: ${(props) => (props.$backgroundColor ? props.$backgroundColor : "white")};
+	background: ${(props) => (props.$backgroundColor ? props.$backgroundColor : "transparent")};
 	box-shadow: ${(props) => (props.$boxShadow ? props.$boxShadow : "none")};
 	justify-content: ${(props) => (props.$justifyContent ? props.$justifyContent : "flex-start")};
 	align-items: ${(props) => (props.$alignItems ? props.$alignItems : "flex-start")};
@@ -21,6 +21,7 @@ export const ContainerFlexSameFlex = styled.View`
 	width: ${(props) => (props.$width ? props.$width : "100%")};
 	height: ${(props) => (props.$height ? props.$height : "auto")};
 	border-radius: ${(props) => (props.$borderRadius ? props.$borderRadius : "0px")};
+	clip-path: ${(props) => (props.$clipPath ? props.$clipPath : "none")};
 `;
 export const ScrollView = styled.ScrollView`
 	flex: 1;
@@ -39,12 +40,11 @@ export const Button = styled.TouchableOpacity`
 `;
 export const TextCustom = styled.Text`
 	font-size: ${(props) => (props.$fontSize ? props.$fontSize : "15px")};
-	color: ${(props) => (props.$color ? props.$color : "black")};
+	color: ${(props) => (props.$color ? props.$color : "white")};
 	font-weight: ${(props) => (props.$fontWeight ? props.$fontWeight : "normal")};
 	text-align: ${(props) => (props.$textAlign ? props.$textAlign : "center")};
 	width: ${(props) => (props.$width ? props.$width : "100%")};
 `;
-
 export const ProfileRounded = styled.Image`
 	border-radius: 50px;
 	width: 70px;
@@ -58,6 +58,6 @@ export const TextInput = styled.TextInput`
 	border-radius: ${(props) => (props.$borderRadius ? props.$borderRadius : "0px")};
 	padding: ${(props) => (props.$padding ? props.$padding : "10px")};
 	font-size: ${(props) => (props.$fontSize ? props.$fontSize : "15px")};
-	color: ${(props) => (props.$color ? props.$color : "black")};
+	color: ${(props) => (props.$color ? props.$color : "#fff")};
 	font-weight: ${(props) => (props.$fontWeight ? props.$fontWeight : "normal")};
-`
+`;
