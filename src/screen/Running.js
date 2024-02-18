@@ -86,7 +86,7 @@ const Running = () => {
 				</ContainerFlexSameFlex>
 			</ContainerFlexSameFlex>
 			<ContainerFlexSameFlex $column $justifyContent={"center"} $alignItems={"center"}>
-				<Button $backgroundColor={"gray"} $width={"80px"} $height={"80px"} $borderRadius={"50px"} style={{
+				<Button $backgroundColor={"#f8dc4a"} $width={"100px"} $height={"100px"} $borderRadius={"50px"} style={{
 					shadowColor: "#000",
 					shadowOffset: {
 						width: 0,
@@ -99,7 +99,7 @@ const Running = () => {
 					marginBottom: 10,
 				}}>
 				</Button>
-				<FontAwesome name="play-circle" size={30} color="white" style={{
+				<FontAwesome name="play-circle" size={30} color="black" style={{
 					position: 'absolute'
 				}} />
 			</ContainerFlexSameFlex>
