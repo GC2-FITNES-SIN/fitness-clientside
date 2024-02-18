@@ -9,7 +9,7 @@ const Profile = () => {
 	};
 	return (
 		<ScrollView>
-			<Container $padding={"15px"}>
+			<Container $padding={"15px"} $backgroundColor={"#1b1b1d"}>
 				{/* name section */}
 				<ContainerFlexSameFlex $gap={"15px"} $justifyContent={"space-between"} $alignItems={"center"}>
 					<ProfileRounded src="https://plus.unsplash.com/premium_photo-1689703068866-5fcba89130ca?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8" />
@@ -22,7 +22,7 @@ const Profile = () => {
 						</TextCustom>
 					</ContainerFlexSameFlex>
 					<ContainerFlexSameFlex $flex={2} $justifyContent={"flex-end"}>
-						<Button onPress={pressHandler} style={{ paddingHorizontal: 20, paddingVertical: 10 }} $backgroundColor={"#84c2b3"} $borderRadius={"16px"}>
+						<Button onPress={pressHandler} style={{ paddingHorizontal: 20, paddingVertical: 10 }} $backgroundColor={"#bd54eb"} $borderRadius={"16px"}>
 							<TextCustom $color={"#fff"}>Edit</TextCustom>
 						</Button>
 					</ContainerFlexSameFlex>
@@ -35,7 +35,7 @@ const Profile = () => {
 						$width={"95px"}
 						$height={"65px"}
 						$borderRadius={"16px"}
-						$backgroundColor={"#fff"}
+						$backgroundColor={"#252527"}
 						style={{
 							shadowColor: "#000",
 							shadowOffset: {
@@ -47,7 +47,7 @@ const Profile = () => {
 							elevation: 3,
 						}}
 					>
-						<TextCustom $color={"#84c2b3"} $fontSize={"15px"}>
+						<TextCustom $color={"#bd54eb"} $fontSize={"15px"}>
 							180 cm
 						</TextCustom>
 						<TextCustom $fontSize={"12.5px"}>Height</TextCustom>
@@ -57,7 +57,7 @@ const Profile = () => {
 						$width={"95px"}
 						$height={"65px"}
 						$borderRadius={"16px"}
-						$backgroundColor={"#fff"}
+						$backgroundColor={"#252527"}
 						style={{
 							shadowColor: "#000",
 							shadowOffset: {
@@ -69,7 +69,7 @@ const Profile = () => {
 							elevation: 3,
 						}}
 					>
-						<TextCustom $color={"#84c2b3"} $fontSize={"15px"}>
+						<TextCustom $color={"#bd54eb"} $fontSize={"15px"}>
 							180 cm
 						</TextCustom>
 						<TextCustom $fontSize={"12.5px"}>Height</TextCustom>
@@ -79,7 +79,7 @@ const Profile = () => {
 						$width={"95px"}
 						$height={"65px"}
 						$borderRadius={"16px"}
-						$backgroundColor={"#fff"}
+						$backgroundColor={"#252527"}
 						style={{
 							shadowColor: "#000",
 							shadowOffset: {
@@ -91,7 +91,7 @@ const Profile = () => {
 							elevation: 3,
 						}}
 					>
-						<TextCustom $color={"#84c2b3"} $fontSize={"15px"}>
+						<TextCustom $color={"#bd54eb"} $fontSize={"15px"}>
 							180 cm
 						</TextCustom>
 						<TextCustom $fontSize={"12.5px"}>Height</TextCustom>
@@ -101,6 +101,7 @@ const Profile = () => {
 				{/* BMI Section */}
 				<ContainerFlexSameFlex
 					$gap={"15px"}
+					$backgroundColor={"#252527"}
 					$column
 					style={{
 						shadowColor: "#000",
@@ -142,6 +143,7 @@ const Profile = () => {
 					$column
 					$borderRadius={"16px"}
 					$padding={"25px"}
+					$backgroundColor={"#252527"}
 				>
 					<ContainerFlexSameFlex $column>
 						<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
@@ -210,7 +212,7 @@ const Profile = () => {
 				</ContainerFlexSameFlex>
 				<Button
 					$borderRadius={"50px"}
-					$backgroundColor={"#84c2b3"}
+					$backgroundColor={"#bd54eb"}
 					style={{
 						shadowColor: "#000",
 						shadowOffset: {
