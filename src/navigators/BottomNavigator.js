@@ -6,6 +6,7 @@ import Profile from "../screen/Profile";
 import Register from "../screen/Register";
 import Login from "../screen/Login";
 import Home from "../screen/Home";
+import Routines from "../screen/Routines";
 
 const Tab = createBottomTabNavigator();
 
@@ -45,6 +46,7 @@ const BottomNavigator = () => {
 			<Tab.Screen name="Login" component={Login} />
 			<Tab.Screen name="Register" component={Register} />
 			<Tab.Screen name="Profile" component={Profile} />
+			<Tab.Screen name="Routines" component={Routines} />
 			<Tab.Screen name="Running" component={Running} />
 			<Tab.Screen name="RunningHistory" component={HistoryRunning} />
 		</Tab.Navigator>
