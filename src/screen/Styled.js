@@ -62,3 +62,4 @@ export const TextInput = styled.TextInput`
 	color: ${(props) => (props.$color ? props.$color : "#fff")};
 	font-weight: ${(props) => (props.$fontWeight ? props.$fontWeight : "normal")};
 `;
+

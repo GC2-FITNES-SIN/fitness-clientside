@@ -16,10 +16,10 @@ const Login = () => {
 					</TextCustom>
 				</ContainerFlexSameFlex>
 				<ContainerFlexSameFlex $column $gap={"15px"} $justifyContent={"center"}>
-					<TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Email" $fontSize={"12px"}>
+					<TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Email" $fontSize={"12px"} $color={"#000"}>
 
 					</TextInput>
-					<TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Password" $fontSize={"12px"}>
+					<TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Password" $fontSize={"12px"} $color={"#000"}>
 
 					</TextInput>
 				</ContainerFlexSameFlex>
