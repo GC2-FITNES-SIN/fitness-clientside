@@ -73,7 +73,7 @@ const Home = () => {
 					<ContainerFlexSameFlex $borderRadius={"16px"} style={{ position: "relative" }}>
 						<OverlayImage
 							image={
-								"https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9keSUyMG1hc3MlMjBpbmRleCUyMGZpdG5lc3N8ZW58MHx8MHx8fDA%3D"
+								"https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODR8fHdlaWdodCUyMHNjYWxlc3xlbnwwfHwwfHx8MA%3D%3D"
 							}
 						/>
 						<ContainerFlexSameFlex style={{ position: "absolute", bottom: "5%", left: "10%" }} $gap={"10px"} $column>
