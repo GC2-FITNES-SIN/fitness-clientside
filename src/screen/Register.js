@@ -3,12 +3,12 @@ import { Button, Container, ContainerFlexSameFlex, TextCustom, TextInput } from 
 
 const Register = () => {
 	return (
-		<Container $padding={"20px"}>
+		<Container $padding={"20px"} $backgroundColor={"#1b1b1d"}>
 			<ContainerFlexSameFlex $column $justifyContent={"flex-end"}>
-				<TextCustom $fontSize={"20px"} $color={"#1D1617"}>
+				<TextCustom $fontSize={"20px"} $color={"white"}>
 					Hey there,
 				</TextCustom>
-				<TextCustom $fontWeight={"700"} $fontSize={"20px"} $color={"#1D1617"}>
+				<TextCustom $fontWeight={"700"} $fontSize={"20px"} $color={"white"}>
 					Create an Account
 				</TextCustom>
 			</ContainerFlexSameFlex>
@@ -27,7 +27,7 @@ const Register = () => {
 				</TextInput>
 			</ContainerFlexSameFlex>
 			<ContainerFlexSameFlex $column $gap={"10px"} $justifyContent={"center"}>
-				<Button $backgroundColor={"#84c2b3"} $height={"60px"} $borderRadius={"99px"} $padding={"20px 0px 0px 0px"}
+				<Button $backgroundColor={"#bd54eb"} $height={"60px"} $borderRadius={"99px"} $padding={"20px 0px 0px 0px"}
 					style={{
 						shadowColor: "#000",
 						shadowOffset: {
@@ -45,7 +45,7 @@ const Register = () => {
 						Register
 					</TextCustom>
 				</Button>
-				<TextCustom $fontSize={"14px"} $color={"#1D1617"}>
+				<TextCustom $fontSize={"14px"} $color={"white"}>
 					Already have an account? Login
 				</TextCustom>
 			</ContainerFlexSameFlex>

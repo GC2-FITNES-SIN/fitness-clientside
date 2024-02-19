@@ -5,9 +5,9 @@ import FontAwesome from "react-native-vector-icons/FontAwesome5"
 
 const Running = () => {
 	return (
-		<Container $padding={"40px 15px 15px 15px"}>
+		<Container $padding={"40px 15px 15px 15px"} $backgroundColor={"#1b1b1d"}>
 			<ContainerFlexSameFlex $column $justifyContent={"center"} alignItems={"center"} style={{
-				shadowColor: "#000",
+				shadowColor: "#1b1b1d",
 				shadowOffset: {
 					width: 0,
 					height: 1,
@@ -19,10 +19,10 @@ const Running = () => {
 				marginBottom: 10,
 			}}
 				$borderRadius={"16px"}>
-				<TextCustom $color={"grey"} $fontSize={"40px"} $fontWeight={"bold"}>
+				<TextCustom $color={"#bd54eb"} $fontSize={"40px"} $fontWeight={"bold"}>
 					15:43:02
 				</TextCustom>
-				<TextCustom $fontSize={"15px"} $color={"grey"} >
+				<TextCustom $fontSize={"15px"} $color={"#bd54eb"} >
 					duration
 				</TextCustom>
 			</ContainerFlexSameFlex>
@@ -44,7 +44,7 @@ const Running = () => {
 					style={{ width: '100%', height: '100%', borderRadius: 16 }}
 				/>
 			</ContainerFlexSameFlex>
-			<ContainerFlexSameFlex $backgroundColor={"#84c2b3"} $gap={"5px"} style={{
+			<ContainerFlexSameFlex $backgroundColor={"white"} $gap={"5px"} style={{
 				shadowColor: "#000",
 				shadowOffset: {
 					width: 0,
@@ -57,36 +57,36 @@ const Running = () => {
 				marginBottom: 10,
 			}}
 				$borderRadius={"16px"}>
-				<ContainerFlexSameFlex $column $justifyContent={"center"} $alignItems={"center"} $padding={"0px"} $backgroundColor={"#84c2b3"} $gap={"3px"}>
-					<FontAwesome name="running" size={30} color="white" />
-					<TextCustom $fontSize={"16px"} $fontWeight={"bold"} $color={"white"}>
+				<ContainerFlexSameFlex $column $justifyContent={"center"} $alignItems={"center"} $padding={"0px"} $backgroundColor={"white"} $gap={"3px"}>
+					<FontAwesome name="running" size={30} color="#bd54eb" />
+					<TextCustom $fontSize={"16px"} $fontWeight={"bold"} $color={"#bd54eb"}>
 						5.4 Km
 					</TextCustom>
-					<TextCustom $fontSize={"12px"} $fontWeight={"bold"} $color={"white"}>
+					<TextCustom $fontSize={"12px"} $fontWeight={"bold"} $color={"#bd54eb"}>
 						Distance
 					</TextCustom>
 				</ContainerFlexSameFlex>
-				<ContainerFlexSameFlex $column $justifyContent={"center"} $alignItems={"center"} $padding={"0px"} $backgroundColor={"#84c2b3"} $gap={"3px"}>
-					<FontAwesome name="burn" size={30} color="white" />
-					<TextCustom $fontSize={"16px"} $fontWeight={"bold"} $color={"white"}>
+				<ContainerFlexSameFlex $column $justifyContent={"center"} $alignItems={"center"} $padding={"0px"} $backgroundColor={"white"} $gap={"3px"}>
+					<FontAwesome name="burn" size={30} color="#bd54eb" />
+					<TextCustom $fontSize={"16px"} $fontWeight={"bold"} $color={"#bd54eb"}>
 						238 Kal
 					</TextCustom>
-					<TextCustom $fontSize={"12px"} $fontWeight={"bold"} $color={"white"}>
+					<TextCustom $fontSize={"12px"} $fontWeight={"bold"} $color={"#bd54eb"}>
 						Calories
 					</TextCustom>
 				</ContainerFlexSameFlex>
-				<ContainerFlexSameFlex $column $justifyContent={"center"} $alignItems={"center"} $padding={"0px"} $backgroundColor={"#84c2b3"} $gap={"3px"}>
-					<FontAwesome name="heartbeat" size={30} color="white" />
-					<TextCustom $fontSize={"16px"} $fontWeight={"bold"} $color={"white"}>
+				<ContainerFlexSameFlex $column $justifyContent={"center"} $alignItems={"center"} $padding={"0px"} $backgroundColor={"white"} $gap={"3px"}>
+					<FontAwesome name="heartbeat" size={30} color="#bd54eb" />
+					<TextCustom $fontSize={"16px"} $fontWeight={"bold"} $color={"#bd54eb"}>
 						128 Bpm
 					</TextCustom>
-					<TextCustom $fontSize={"12px"} $fontWeight={"bold"} $color={"white"}>
+					<TextCustom $fontSize={"12px"} $fontWeight={"bold"} $color={"#bd54eb"}>
 						Heart Rate
 					</TextCustom>
 				</ContainerFlexSameFlex>
 			</ContainerFlexSameFlex>
 			<ContainerFlexSameFlex $column $justifyContent={"center"} $alignItems={"center"}>
-				<Button $backgroundColor={"#b4b4b4"} $width={"100px"} $height={"100px"} $borderRadius={"50px"} style={{
+				<Button $backgroundColor={"#bd54eb"} $width={"80px"} $height={"80px"} $borderRadius={"50px"} style={{
 					shadowColor: "#000",
 					shadowOffset: {
 						width: 0,
