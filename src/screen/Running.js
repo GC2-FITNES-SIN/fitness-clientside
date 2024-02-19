@@ -3,7 +3,6 @@ import { Button, Container, ContainerFlexSameFlex, TextCustom } from "./Styled";
 import { Image } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { StatusBar } from "expo-status-bar";
 
 const Running = () => {
 	const [isRunning, setIsRunning] = useState(false);
@@ -21,7 +20,6 @@ const Running = () => {
 
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
-			<StatusBar backgroundColor="#1b1b1d" barStyle="light-content" />
 			<Container $padding={"15px"} $backgroundColor={"#1b1b1d"}>
 				{isRunning && (
 					<ContainerFlexSameFlex

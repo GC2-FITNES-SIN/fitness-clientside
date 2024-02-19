@@ -2,12 +2,10 @@ import React from "react";
 import { Container, ContainerFlexSameFlex, ScrollView, TextCustom } from "./Styled";
 import AreaChart from "../components/AreaChart";
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { StatusBar } from "react-native";
 
 const HistoryRunning = () => {
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
-			<StatusBar backgroundColor="#1b1b1d" barStyle="light-content" />
 			<ScrollView>
 				<Container $padding={"15px"} $backgroundColor={"#1b1b1d"} $gap={"15px"}>
 					<ContainerFlexSameFlex $gap={"15px"} $column $justifyContent={"space-between"} $alignItems={"center"}>
