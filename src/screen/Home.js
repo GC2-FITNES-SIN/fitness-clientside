@@ -3,7 +3,7 @@ import { Image } from "react-native";
 import { Container, Button, ScrollView, ContainerFlexSameFlex, TextCustom } from "./Styled";
 import PieChartCustom from "../components/PieChartCustom";
 import OverlayImage from "../components/OverlayImage";
-
+import { SafeAreaView } from "react-native-safe-area-context";
 const Home = () => {
 	return (
 		<ScrollView>
