@@ -10,6 +10,10 @@ const Running = () => {
 	const [location, setLocation] = useState([]);
 
 	const isRunningToggle = () => {
+		// for reset the data after toggle
+		if (isRunning) {
+			setLocation([]);
+		}
 		setIsRunning(!isRunning);
 	};
 
