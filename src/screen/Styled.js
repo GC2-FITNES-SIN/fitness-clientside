@@ -37,6 +37,7 @@ export const Button = styled.TouchableOpacity`
 	border-radius: ${(props) => (props.$borderRadius ? props.$borderRadius : "0px")};
 	width: ${(props) => (props.$width ? props.$width : "100%")};
 	height: ${(props) => (props.$height ? props.$height : "auto")};
+	justify-content: ${(props) => (props.$justifyContent ? props.$justifyContent : "flex-start")};
 `;
 export const TextCustom = styled.Text`
 	font-size: ${(props) => (props.$fontSize ? props.$fontSize : "15px")};
