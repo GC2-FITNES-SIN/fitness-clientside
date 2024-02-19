@@ -3,7 +3,6 @@ import { Button, Container, ContainerFlexSameFlex, ProfileRounded, ScrollView, T
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Image, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { StatusBar } from "expo-status-bar";
 
 const Profile = () => {
 	const pressHandler = () => {
@@ -11,7 +10,6 @@ const Profile = () => {
 	};
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
-			<StatusBar backgroundColor="#1b1b1d" barStyle="light-content" />
 			<ScrollView>
 				<Container $padding={"15px"} $backgroundColor={"#1b1b1d"}>
 					{/* name section */}

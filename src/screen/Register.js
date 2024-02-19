@@ -1,12 +1,10 @@
 import React from "react";
 import { Button, Container, ContainerFlexSameFlex, TextCustom, TextInput } from "./Styled";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { StatusBar } from "expo-status-bar";
 
 const Register = () => {
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
-			<StatusBar backgroundColor="#1b1b1d" barStyle="light-content" />
 			<Container $padding={"15px"} $backgroundColor={"#1b1b1d"}>
 				<ContainerFlexSameFlex $column $justifyContent={"flex-end"}>
 					<TextCustom $fontSize={"20px"} $color={"white"}>
