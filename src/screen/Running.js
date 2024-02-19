@@ -19,11 +19,11 @@ const Running = () => {
 				marginBottom: 10,
 			}}
 				$borderRadius={"16px"}>
-				<TextCustom $color={"gray"} $fontSize={"40px"} $fontWeight={"bold"}>
-					◦ 15:43
+				<TextCustom $color={"grey"} $fontSize={"40px"} $fontWeight={"bold"}>
+					15:43:02
 				</TextCustom>
-				<TextCustom $fontSize={"12px"}>
-					Current Pace 6:10/Km
+				<TextCustom $fontSize={"15px"} $color={"grey"} >
+					duration
 				</TextCustom>
 			</ContainerFlexSameFlex>
 			<ContainerFlexSameFlex $flex={"4"} $column $padding={"0px"} style={{
@@ -86,7 +86,7 @@ const Running = () => {
 				</ContainerFlexSameFlex>
 			</ContainerFlexSameFlex>
 			<ContainerFlexSameFlex $column $justifyContent={"center"} $alignItems={"center"}>
-				<Button $backgroundColor={"#f8dc4a"} $width={"100px"} $height={"100px"} $borderRadius={"50px"} style={{
+				<Button $backgroundColor={"#b4b4b4"} $width={"100px"} $height={"100px"} $borderRadius={"50px"} style={{
 					shadowColor: "#000",
 					shadowOffset: {
 						width: 0,
@@ -99,7 +99,7 @@ const Running = () => {
 					marginBottom: 10,
 				}}>
 				</Button>
-				<FontAwesome name="play-circle" size={30} color="black" style={{
+				<FontAwesome name="play-circle" size={30} color="white" style={{
 					position: 'absolute'
 				}} />
 			</ContainerFlexSameFlex>
