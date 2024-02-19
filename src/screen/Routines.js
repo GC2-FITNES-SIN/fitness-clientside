@@ -6,7 +6,7 @@ const Routines = () => {
 		<Container>
 			<ContainerFlexSameFlex $column $backgroundColor={"#1b1b1d"}>
 				{/* <CarouselCustom /> */}
-				<Text>Test</Text>
+
 			</ContainerFlexSameFlex>
 		</Container>
 	);
