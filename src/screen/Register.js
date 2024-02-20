@@ -18,40 +18,52 @@ const Register = () => {
             Create an Account
           </TextCustom>
         </ContainerFlexSameFlex>
-        <ContainerFlexSameFlex $column $gap={"15px"} $justifyContent={"center"} $padding={"30px 10px 10px 10px"} $flex={"4"}>
-          <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Username" $fontSize={"12px"} $color={"#000"} />
-          <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Email" $fontSize={"12px"} $color={"#000"} />
-          <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Password" $fontSize={"12px"} $color={"#000"} />
-          <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Weight" $fontSize={"12px"} $color={"#000"} />
-          <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Height" $fontSize={"12px"} $color={"#000"} />
-          <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Age" $fontSize={"12px"} $color={"#000"} />
-          <TouchableOpacity onPress={() => setModalVisible(true)}>
-            <View style={{ backgroundColor: "#F7F8F8", borderRadius: 14, height: 48, justifyContent: "center" }}>
-              <TextCustom $fontSize={"12px"} $width={"342px"} $color={"#686868"}>{selectedGender || "Select Gender"}</TextCustom>
-            </View>
-          </TouchableOpacity>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => setModalVisible(false)}
-          >
-            <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "rgba(0,0,0,0.5)" }}>
-              <View style={{ backgroundColor: "#FFFFFF", borderRadius: 14, padding: 20, width: 100, gap: 10 }}>
-                {genderOptions.map((option, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() => {
-                      setSelectedGender(option);
-                      setModalVisible(false);
-                    }}
-                  >
-                    <TextCustom $fontSize={"14px"} $color={"#686868"}>{option}</TextCustom>
-                  </TouchableOpacity>
-                ))}
+        <ContainerFlexSameFlex $column $gap={"15px"} $justifyContent={"center"} $flex={"4"}>
+          <ContainerFlexSameFlex>
+            <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Username" $fontSize={"12px"} $color={"#000"} />
+          </ContainerFlexSameFlex>
+          <ContainerFlexSameFlex>
+            <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Email" $fontSize={"12px"} $color={"#000"} />
+          </ContainerFlexSameFlex>
+          <ContainerFlexSameFlex>
+            <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Password" $fontSize={"12px"} $color={"#000"} />
+          </ContainerFlexSameFlex>
+          <ContainerFlexSameFlex $justifyContent={"space-between"}>
+            <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $width={"45%"} $height={"48px"} placeholder="Weight" $fontSize={"12px"} $color={"#000"} />
+            <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $width={"45%"} $height={"48px"} placeholder="Height" $fontSize={"12px"} $color={"#000"} />
+          </ContainerFlexSameFlex>
+          <ContainerFlexSameFlex>
+            <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Age" $fontSize={"12px"} $color={"#000"} />
+          </ContainerFlexSameFlex>
+          <ContainerFlexSameFlex>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+              <View style={{ backgroundColor: "#F7F8F8", borderRadius: 14, height: 48, justifyContent: "center" }}>
+                <TextCustom $fontSize={"12px"} $width={"322px"} $color={"#686868"}>{selectedGender || "Select Gender"}</TextCustom>
               </View>
-            </View>
-          </Modal>
+            </TouchableOpacity>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => setModalVisible(false)}
+            >
+              <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "rgba(0,0,0,0.5)" }}>
+                <View style={{ backgroundColor: "#FFFFFF", borderRadius: 14, padding: 20, width: 100, gap: 10 }}>
+                  {genderOptions.map((option, index) => (
+                    <TouchableOpacity
+                      key={index}
+                      onPress={() => {
+                        setSelectedGender(option);
+                        setModalVisible(false);
+                      }}
+                    >
+                      <TextCustom $fontSize={"14px"} $color={"#686868"}>{option}</TextCustom>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </View>
+            </Modal>
+          </ContainerFlexSameFlex>
         </ContainerFlexSameFlex>
         <ContainerFlexSameFlex $column $gap={"10px"} $justifyContent={"center"}>
           <Button $backgroundColor={"#bd54eb"} $height={"60px"} $borderRadius={"99px"} $padding={"20px 0px 0px 0px"}
