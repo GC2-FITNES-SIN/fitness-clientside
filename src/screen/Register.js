@@ -1,11 +1,33 @@
 import React, { useState } from "react";
 import { Button, Container, ContainerFlexSameFlex, ScrollView, TextCustom, TextInput } from "./Styled";
 import { SafeAreaView, Modal, View, TouchableOpacity } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 const Register = () => {
+  const navigation = useNavigation()
+  const [username, setUsername] = useState()
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+  const [weight, setWeight] = useState()
+  const [height, setHeight] = useState()
+  const [age, setAge] = useState()
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedGender, setSelectedGender] = useState(null);
   const genderOptions = ["Male", "Female", "Other"];
+
+
+  const submitForm = async (event) => {
+    try {
+      const { data } = await axios({
+        url: "",
+        method: "POST",
+        data: { username, email, password, weight, height, age, selectedGender },
+      });
+      navigation("Login")
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -18,23 +40,23 @@ const Register = () => {
             Create an Account
           </TextCustom>
         </ContainerFlexSameFlex>
-          <ContainerFlexSameFlex $column $gap={"10px"} $justifyContent={"center"} $flex={"3"} $padding={"0px"}>
-        <ScrollView>
+        <ContainerFlexSameFlex $column $gap={"10px"} $justifyContent={"center"} $flex={"4"} $padding={"0px"}>
+          <ScrollView>
             <ContainerFlexSameFlex>
-              <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Username" $fontSize={"12px"} $color={"#000"} />
+              <TextInput value={username} onChangeText={setUsername} $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Username" $fontSize={"12px"} $color={"#000"} />
             </ContainerFlexSameFlex>
             <ContainerFlexSameFlex>
-              <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Email" $fontSize={"12px"} $color={"#000"} />
+              <TextInput value={email} onChangeText={setEmail} $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Email" $fontSize={"12px"} $color={"#000"} />
             </ContainerFlexSameFlex>
             <ContainerFlexSameFlex>
-              <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Password" $fontSize={"12px"} $color={"#000"} />
+              <TextInput value={password} onChangeText={setPassword} $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Password" secureTextEntry $fontSize={"12px"} $color={"#000"} />
             </ContainerFlexSameFlex>
             <ContainerFlexSameFlex $justifyContent={"space-between"}>
-              <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $width={"45%"} $height={"48px"} placeholder="Weight" $fontSize={"12px"} $color={"#000"} />
-              <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $width={"45%"} $height={"48px"} placeholder="Height" $fontSize={"12px"} $color={"#000"} />
+              <TextInput value={weight} onChangeText={setWeight} $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $width={"45%"} $height={"48px"} placeholder="Weight" $fontSize={"12px"} $color={"#000"} />
+              <TextInput value={height} onChangeText={setHeight} $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $width={"45%"} $height={"48px"} placeholder="Height" $fontSize={"12px"} $color={"#000"} />
             </ContainerFlexSameFlex>
             <ContainerFlexSameFlex>
-              <TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Age" $fontSize={"12px"} $color={"#000"} />
+              <TextInput value={age} onChangeText={setAge} $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Age" $fontSize={"12px"} $color={"#000"} />
             </ContainerFlexSameFlex>
             <ContainerFlexSameFlex $justifyContent={"center"}>
               <TouchableOpacity onPress={() => setModalVisible(true)}>
@@ -65,31 +87,31 @@ const Register = () => {
                 </View>
               </Modal>
             </ContainerFlexSameFlex>
-            </ScrollView>
-          </ContainerFlexSameFlex>
-          <ContainerFlexSameFlex $column $gap={"10px"} $justifyContent={"center"}>
-            <Button $backgroundColor={"#bd54eb"} $height={"60px"} $borderRadius={"99px"} $padding={"20px 0px 0px 0px"}
-              style={{
-                shadowColor: "#000",
-                shadowOffset: {
-                  width: 0,
-                  height: 10,
-                },
-                shadowOpacity: 0.3,
-                shadowRadius: 22,
-                elevation: 3,
-                marginTop: 5,
-                marginBottom: 5,
-              }}
-            >
-              <TextCustom $fontWeight={"700"} $fontSize={"16px"} $color={"#FFFFFF"}>
-                Register
-              </TextCustom>
-            </Button>
-            <TextCustom $fontSize={"14px"} $color={"white"}>
-              Already have an account? Login
+          </ScrollView>
+        </ContainerFlexSameFlex>
+        <ContainerFlexSameFlex $column $gap={"10px"} $justifyContent={"center"}>
+          <Button onPress={submitForm} $backgroundColor={"#bd54eb"} $height={"60px"} $borderRadius={"99px"} $padding={"20px 0px 0px 0px"}
+            style={{
+              shadowColor: "#000",
+              shadowOffset: {
+                width: 0,
+                height: 10,
+              },
+              shadowOpacity: 0.3,
+              shadowRadius: 22,
+              elevation: 3,
+              marginTop: 5,
+              marginBottom: 5,
+            }}
+          >
+            <TextCustom $fontWeight={"700"} $fontSize={"16px"} $color={"#FFFFFF"}>
+              Register
             </TextCustom>
-          </ContainerFlexSameFlex>
+          </Button>
+          <TextCustom $fontSize={"14px"} $color={"white"}>
+            Already have an account? Login
+          </TextCustom>
+        </ContainerFlexSameFlex>
       </Container>
     </SafeAreaView>
   );
