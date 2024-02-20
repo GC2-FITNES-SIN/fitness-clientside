@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Container, ContainerFlexSameFlex, ProfileRounded, ScrollView, TextCustom } from "./Styled";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import * as SecureStore from "expo-secure-store";
 import { Image, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AuthContext from "../store/Auth";
 
 const Profile = () => {
 	const pressHandler = () => {
 		console.log("touch");
 	};
+
+	const { setLogin } = useContext(AuthContext);
+
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<ScrollView>
@@ -226,6 +230,12 @@ const Profile = () => {
 							elevation: 3,
 							marginTop: 5,
 							marginBottom: 5,
+						}}
+						onPress={async () => {
+							console.log("masuk");
+							SecureStore.deleteItemAsync("access_Token");
+							SecureStore.deleteItemAsync("profile");
+							setLogin(false);
 						}}
 					>
 						<TextCustom $color={"white"} $textAlign={"center"}>

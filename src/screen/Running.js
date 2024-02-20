@@ -1,22 +1,73 @@
-import React, { useState } from "react";
-import { Button, Container, ContainerFlexSameFlex, TextCustom } from "./Styled";
-import { Image } from "react-native";
-import FontAwesome from "react-native-vector-icons/FontAwesome5";
+import React, { useEffect, useState } from "react";
+import MapView from "react-native-maps";
+import MapViewDirections from "react-native-maps-directions";
+import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-const Running = () => {
+import { Button, Container, ContainerFlexSameFlex, TextCustom } from "./Styled";
+import * as Location from "expo-location";
+import FontAwesome from "react-native-vector-icons/FontAwesome5";
+import { useFocusEffect } from "@react-navigation/core";
+export default function Running() {
 	const [isRunning, setIsRunning] = useState(false);
 	const [location, setLocation] = useState([]);
+	const [time, setTime] = useState(0);
+	const [errorMsg, setErrorMsg] = useState("");
+
+	// const key = process.env.API_MAP_KEY;
+	const key = "AIzaSyAY8BQuOsrMtH090joCx6JV7Nkn_AT0xnA";
 
 	const isRunningToggle = () => {
 		// for reset the data after toggle
 		if (isRunning) {
 			setLocation([]);
+			setTime(0);
 		}
 		setIsRunning(!isRunning);
 	};
 
-	console.log(isRunning, "<<");
+	const intervalLocation = () => {
+		setInterval(() => {
+			setLocation((location) => [...location, location.coords]);
+		}, 10000);
+	};
+
+	const intervalTime = () => {
+		setInterval(() => {
+			setTime(time + 1);
+		}, 1000);
+	};
+
+	// useFocusEffect(async () => {
+	// let { status } = await Location.requestForegroundPermissionsAsync();
+	// if (status !== "granted") {
+	// 	setErrorMsg("Permission to access location was denied");
+	// 	return;
+	// }
+
+	// 	if (status == "granted") {
+	// 		if (isRunning) {
+	// 			intervalTime();
+	// 			let location = await Location.getCurrentPositionAsync({});
+	// 			setLocation(location);
+	// 		}
+	// 	}
+
+	// 	return () => {
+	// 		clearInterval(intervalLocation, intervalTime);
+	// 	};
+	// }, [time]);
+
+	// useEffect(() => {
+	// 	(async () => {
+	// 		let { status } = await Location.requestForegroundPermissionsAsync();
+	// 		if (status !== "granted") {
+	// 			setErrorMsg("Permission to access location was denied");
+	// 			return;
+	// 		}
+	// 	})();
+	// }, [isRunning]);
+
+	console.log(isRunning, "<<", location, time, key);
 
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
@@ -66,10 +117,24 @@ const Running = () => {
 					}}
 					$borderRadius={"16px"}
 				>
-					<Image
-						source={{ uri: "https://awsimages.detik.net.id/visual/2023/09/06/google-maps-ktt-asean_169.png?w=650" }}
-						style={{ width: "100%", height: "100%", borderRadius: 16 }}
-					/>
+					<MapView
+						initialRegion={{
+							latitude: -6.26051972136238,
+							longitude: 106.78170206252449,
+							latitudeDelta: 0.01,
+							longitudeDelta: 0.01,
+						}}
+						style={StyleSheet.absoluteFill}
+					>
+						<MapViewDirections
+							origin={{ latitude: -6.26051972136238, longitude: 106.78170206252449 }}
+							destination={{ longitude: -6.263254134008508, latitude: 106.7822867640354 }}
+							optimizeWaypoints={true}
+							apikey="AIzaSyAY8BQuOsrMtH090joCx6JV7Nkn_AT0xnA"
+							strokeColor="hotPink"
+							strokeWidth={3}
+						/>
+					</MapView>
 				</ContainerFlexSameFlex>
 				{isRunning && (
 					<ContainerFlexSameFlex
@@ -151,6 +216,14 @@ const Running = () => {
 			</Container>
 		</SafeAreaView>
 	);
-};
+}
 
-export default Running;
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	},
+	map: {
+		width: "100%",
+		height: "100%",
+	},
+});
