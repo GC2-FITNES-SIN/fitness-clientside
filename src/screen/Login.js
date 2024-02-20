@@ -2,15 +2,17 @@ import React, { useContext, useState } from "react";
 import { Button, Container, ContainerFlexSameFlex, TextCustom, TextInput } from "./Styled";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as SecureStore from "expo-secure-store";
-import axios from "axios";
 import { Axios, verifyToken } from "../utils";
 import AuthContext from "../store/Auth";
+import { Text, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const Login = () => {
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
 
 	const { login, setLogin } = useContext(AuthContext);
+	const { navigate } = useNavigation();
 
 	console.log(login);
 	const submitForm = async () => {
@@ -32,7 +34,7 @@ const Login = () => {
 			const { access_Token, ...profile } = data;
 
 			console.log(profile);
-			SecureStore.setItem("userprofile", JSON.stringify(profile));
+			SecureStore.setItem("profile", JSON.stringify(profile));
 
 			setLogin(true);
 		} catch (error) {
@@ -97,9 +99,11 @@ const Login = () => {
 							Login
 						</TextCustom>
 					</Button>
-					<TextCustom $fontSize={"14px"} $color={"white"}>
-						Don’t have an account yet? Register
-					</TextCustom>
+					<Button onPress={() => navigate("Register")} $backgroundColor={"transparent"}>
+						<TextCustom $fontSize={"14px"} $color={"white"} $textAlign={"center"}>
+							Don’t have an account yet? <TextCustom $color={"#bd54eb"}>Register</TextCustom>
+						</TextCustom>
+					</Button>
 				</ContainerFlexSameFlex>
 			</Container>
 		</SafeAreaView>

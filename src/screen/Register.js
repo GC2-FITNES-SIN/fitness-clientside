@@ -16,6 +16,8 @@ const Register = () => {
 	const [selectedGender, setSelectedGender] = useState(null);
 	const genderOptions = ["Male", "Female", "Other"];
 
+	const { navigate } = useNavigation();
+
 	const submitForm = async (event) => {
 		try {
 			// const data = await axios.post(
@@ -180,9 +182,14 @@ const Register = () => {
 							Register
 						</TextCustom>
 					</Button>
-					<TextCustom $fontSize={"14px"} $color={"white"}>
-						Already have an account? Login
-					</TextCustom>
+					<Button onPress={() => navigate("Login")} $backgroundColor={"transparent"}>
+						<TextCustom $fontSize={"14px"} $color={"white"}>
+							Already have an account?{" "}
+							<TextCustom $fontSize={"14px"} $color={"#bd54eb"}>
+								Login
+							</TextCustom>
+						</TextCustom>
+					</Button>
 				</ContainerFlexSameFlex>
 			</Container>
 		</SafeAreaView>
