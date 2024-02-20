@@ -1,22 +1,40 @@
 import React, { useContext, useState } from "react";
 import { Button, Container, ContainerFlexSameFlex, TextCustom, TextInput } from "./Styled";
 import { SafeAreaView } from "react-native-safe-area-context";
-import * as SecureStore from 'expo-secure-store';
-import { AuthContext } from "../context/authContext";
+import * as SecureStore from "expo-secure-store";
+import axios from "axios";
+import { Axios, verifyToken } from "../utils";
+import AuthContext from "../store/Auth";
 
 const Login = () => {
-	const [email, setEmail] = useState()
-	const [password, setPassword] = useState()
-	const authContext = useContext(AuthContext)
-	const submitForm = async (event) => {
+	const [email, setEmail] = useState();
+	const [password, setPassword] = useState();
+
+	const { login, setLogin } = useContext(AuthContext);
+
+	console.log(login);
+	const submitForm = async () => {
 		try {
-			const { data } = await axios({
-				url: "",
+			// const { data } = await axios({
+			// 	url: "http://192.168.100.78:3000/login",
+			// 	method: "POST",
+			// 	data: { email, password, username: "fiki" },
+			// });
+
+			const { data } = await Axios({
 				method: "POST",
-				data: { email, password },
+				url: "/login",
+				data: { email, password, username: "fiki" },
 			});
-			await SecureStore.setItemAsync("access_token", data.access_Token);
-			authContext.setIsSignedIn(true)
+
+			await SecureStore.setItemAsync("access_Token", data.access_Token);
+
+			const { access_Token, ...profile } = data;
+
+			console.log(profile);
+			SecureStore.setItem("userprofile", JSON.stringify(profile));
+
+			setLogin(true);
 		} catch (error) {
 			console.log(error);
 		}
@@ -34,15 +52,34 @@ const Login = () => {
 					</TextCustom>
 				</ContainerFlexSameFlex>
 				<ContainerFlexSameFlex $column $gap={"15px"} $justifyContent={"center"}>
-					<TextInput value={email} onChangeText={setEmail} $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Email" $fontSize={"12px"} $color={"#000"}>
-
-					</TextInput>
-					<TextInput value={password} onChangeText={setPassword} $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Password" $fontSize={"12px"} $color={"#000"}>
-
-					</TextInput>
+					<TextInput
+						value={email}
+						onChangeText={setEmail}
+						$backgroundColor={"#F7F8F8"}
+						$borderRadius={"14px"}
+						$height={"48px"}
+						placeholder="Email"
+						$fontSize={"12px"}
+						$color={"#000"}
+					></TextInput>
+					<TextInput
+						value={password}
+						onChangeText={setPassword}
+						$backgroundColor={"#F7F8F8"}
+						$borderRadius={"14px"}
+						$height={"48px"}
+						placeholder="Password"
+						$fontSize={"12px"}
+						$color={"#000"}
+					></TextInput>
 				</ContainerFlexSameFlex>
 				<ContainerFlexSameFlex $column $gap={"10px"} $justifyContent={"center"}>
-					<Button onPress={submitForm} $backgroundColor={"#bd54eb"} $height={"60px"} $borderRadius={"99px"} $padding={"20px 0px 0px 0px"}
+					<Button
+						onPress={submitForm}
+						$backgroundColor={"#bd54eb"}
+						$height={"60px"}
+						$borderRadius={"99px"}
+						$padding={"20px 0px 0px 0px"}
 						style={{
 							shadowColor: "#000",
 							shadowOffset: {
@@ -70,9 +107,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
-
-
-
-
