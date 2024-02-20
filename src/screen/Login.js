@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Button, Container, ContainerFlexSameFlex, TextCustom, TextInput } from "./Styled";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import * as SecureStore from 'expo-secure-store';
+import { AuthContext } from "../context/authContext";
 
 const Login = () => {
+	const [email, setEmail] = useState()
+	const [password, setPassword] = useState()
+	const authContext = useContext(AuthContext)
+	const submitForm = async (event) => {
+		try {
+			const { data } = await axios({
+				url: "",
+				method: "POST",
+				data: { email, password },
+			});
+			await SecureStore.setItemAsync("access_token", data.access_Token);
+			authContext.setIsSignedIn(true)
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<Container $padding={"15px"} $backgroundColor={"#1b1b1d"}>
@@ -16,15 +34,15 @@ const Login = () => {
 					</TextCustom>
 				</ContainerFlexSameFlex>
 				<ContainerFlexSameFlex $column $gap={"15px"} $justifyContent={"center"}>
-					<TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Email" $fontSize={"12px"}>
+					<TextInput value={email} onChangeText={setEmail} $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Email" $fontSize={"12px"} $color={"#000"}>
 
 					</TextInput>
-					<TextInput $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Password" $fontSize={"12px"}>
+					<TextInput value={password} onChangeText={setPassword} $backgroundColor={"#F7F8F8"} $borderRadius={"14px"} $height={"48px"} placeholder="Password" $fontSize={"12px"} $color={"#000"}>
 
 					</TextInput>
 				</ContainerFlexSameFlex>
 				<ContainerFlexSameFlex $column $gap={"10px"} $justifyContent={"center"}>
-					<Button $backgroundColor={"#bd54eb"} $height={"60px"} $borderRadius={"99px"} $padding={"20px 0px 0px 0px"}
+					<Button onPress={submitForm} $backgroundColor={"#bd54eb"} $height={"60px"} $borderRadius={"99px"} $padding={"20px 0px 0px 0px"}
 						style={{
 							shadowColor: "#000",
 							shadowOffset: {
