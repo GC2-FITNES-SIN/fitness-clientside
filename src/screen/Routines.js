@@ -102,7 +102,7 @@ const Routines = () => {
 							{routinesCat.overweight.slice(0, 3).map((el, i) => {
 								return (
 									<>
-										<Button $backgroundColor="transparent" $padding={"0px"} key={i}>
+										<Button $backgroundColor="transparent" $padding={"0px"} key={i} onPress={() => navigation.navigate("DetailRoutine", { id: el._id })}>
 											<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} style={{ position: "relative", zIndex: 1 }}>
 												<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
 													<Image
@@ -140,7 +140,7 @@ const Routines = () => {
 							{routinesCat.normal.slice(0, 3).map((el, i) => {
 								return (
 									<>
-										<Button $backgroundColor="transparent" $padding={"0px"} key={i}>
+										<Button $backgroundColor="transparent" $padding={"0px"} key={i} onPress={() => navigation.navigate("DetailRoutine", { id: el._id })}>
 											<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} style={{ position: "relative", zIndex: 1 }}>
 												<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
 													<Image
@@ -178,7 +178,7 @@ const Routines = () => {
 							{routinesCat.underweight.slice(0, 3).map((el, i) => {
 								return (
 									<>
-										<Button $backgroundColor="transparent" $padding={"0px"} key={i}>
+										<Button $backgroundColor="transparent" $padding={"0px"} key={i} onPress={() => navigation.navigate("DetailRoutine", { id: el._id })}>
 											<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} style={{ position: "relative", zIndex: 1 }}>
 												<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
 													<Image
