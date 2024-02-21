@@ -14,6 +14,11 @@ export default function App() {
 				setLogin(true);
 			}
 		});
+		SecureStore.getItemAsync("user").then((res) => {
+			if (res) {
+				setProfile(JSON.parse(res));
+			}
+		});
 	}, [login]);
 	return (
 		<>
