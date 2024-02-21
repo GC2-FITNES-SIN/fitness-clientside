@@ -40,7 +40,7 @@ const DetailRoutine = () => {
 	const fetchDetailRoutine = async () => {
 		try {
 			const { data } = await axios({
-				url: `https://21d4-2a09-bac5-3a20-18c8-00-278-88.ngrok-free.app/routines/${id}`,
+				url: `http://34.101.140.227/routines/${id}`,
 				method: "GET",
 				headers: {
 					Authorization: "Bearer " + SecureStore.getItem("access_token"),
