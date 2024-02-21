@@ -7,7 +7,7 @@ const PieChartCustom = ({ data }) => {
 		{ value: 20, color: "#fff" },
 	];
 
-	return <PieChart data={pieData} showText textColor="white" radius={75} fontWeight="bold" textSize={7.5} focusOnPress={false} showValuesAsLabels />;
+	return <PieChart data={pieData} showText textColor="white" radius={75} fontWeight="bold" textSize={10} focusOnPress={false} showValuesAsLabels />;
 };
 
 export default PieChartCustom;

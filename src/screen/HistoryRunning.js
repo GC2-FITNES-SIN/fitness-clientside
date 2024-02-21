@@ -45,7 +45,6 @@ const HistoryRunning = () => {
 					{/* Card History Running */}
 					{history.length > 0 &&
 						history.map((item, i) => {
-							console.log(item, "history");
 							return (
 								<>
 									<ContainerFlexSameFlex $padding={"15px"} $gap={"15px"} $borderRadius={"16px"} $backgroundColor={"#fff"} key={i}>
