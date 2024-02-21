@@ -2,7 +2,7 @@ import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 
 export const Axios = axios.create({
-	baseURL: "http://192.168.11.69:3000/",
+	baseURL: "http://34.101.140.227",
 	headers: {
 		Authorization: `Bearer ${SecureStore.getItem("access_Token")}`,
 		"content-type": "application/x-www-form-urlencoded",
@@ -24,4 +24,8 @@ export const convertTime = (duration) => {
 	ret += "" + secs;
 
 	return ret;
+};
+
+export const roundNumber = (number) => {
+	return Math.round(number);
 };
