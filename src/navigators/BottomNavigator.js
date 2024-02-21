@@ -3,11 +3,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import HistoryRunning from "../screen/HistoryRunning";
 import Running from "../screen/Running";
 import Profile from "../screen/Profile";
-import Register from "../screen/Register";
-import Login from "../screen/Login";
 import Home from "../screen/Home";
 import Routines from "../screen/Routines";
-import DetailRoutine from "../screen/DetailRoutine";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,10 +19,10 @@ const BottomNavigator = () => {
 						iconName = focused ? "home" : "home-outline";
 					} else if (route.name === "Profile") {
 						iconName = focused ? "person" : "person-outline";
-					} else if (route.name === "Search") {
-						iconName = focused ? "search" : "search-outline";
-					} else if (route.name === "AddPost") {
-						iconName = focused ? "add" : "add-outline";
+					} else if (route.name === "Routines") {
+						iconName = focused ? "fitness" : "fitness-outline";
+					} else if (route.name === "Running") {
+						iconName = focused ? "footsteps" : "footsteps-outline";
 					}
 
 					return <Ionicons name={iconName} size={size} color={color} />;
