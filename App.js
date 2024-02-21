@@ -5,6 +5,7 @@ import { StatusBar } from "react-native";
 import * as SecureStore from "expo-secure-store";
 export default function App() {
 	const [login, setLogin] = useState(false);
+	const [profile, setProfile] = useState();
 
 	useEffect(() => {
 		SecureStore.getItemAsync("access_Token").then((res) => {
@@ -16,7 +17,7 @@ export default function App() {
 	return (
 		<>
 			<StatusBar backgroundColor="#1b1b1d" barStyle="light-content" />
-			<AuthContext.Provider value={{ login, setLogin }}>
+			<AuthContext.Provider value={{ login, setLogin, profile, setProfile }}>
 				<MainStack />
 			</AuthContext.Provider>
 		</>

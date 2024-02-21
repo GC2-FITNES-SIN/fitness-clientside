@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import MapView from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { StyleSheet, View } from "react-native";
@@ -44,18 +44,42 @@ export default function Running() {
 	// 	return;
 	// }
 
-	// 	if (status == "granted") {
-	// 		if (isRunning) {
-	// 			intervalTime();
-	// 			let location = await Location.getCurrentPositionAsync({});
-	// 			setLocation(location);
-	// 		}
+	// if (status == "granted") {
+	// 	if (isRunning) {
+	// 		intervalTime();
+	// 		let location = await Location.getCurrentPositionAsync({});
+	// 		setLocation(location);
 	// 	}
+	// }
 
 	// 	return () => {
 	// 		clearInterval(intervalLocation, intervalTime);
 	// 	};
 	// }, [time]);
+
+	useFocusEffect(
+		useCallback(() => {
+			let status, location;
+
+			Location.requestForegroundPermissionsAsync().then((res) => {
+				status = res.status;
+			});
+			if (status !== "granted") {
+				setErrorMsg("Permission to access location was denied");
+				return;
+			}
+
+			if (status == "granted") {
+				if (isRunning) {
+					intervalTime();
+					Location.getCurrentPositionAsync({}).then((res) => (location = res));
+					setLocation(location);
+				}
+			}
+
+			return () => clearInterval(intervalLocation, intervalTime);
+		}, [])
+	);
 
 	// useEffect(() => {
 	// 	(async () => {
