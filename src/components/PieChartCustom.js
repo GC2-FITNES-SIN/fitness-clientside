@@ -1,7 +1,7 @@
 import { PieChart } from "react-native-gifted-charts";
-const PieChartCustom = () => {
+const PieChartCustom = ({ data }) => {
 	const pieData = [
-		{ value: 20, color: "#bd54eb", text: "Overweight", shiftX: 15, shiftY: -15 },
+		{ value: 20, color: "#bd54eb", text: data, shiftX: 15, shiftY: -15 },
 		{ value: 20, color: "#fff" },
 		{ value: 20, color: "#fff" },
 		{ value: 20, color: "#fff" },

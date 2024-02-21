@@ -23,6 +23,8 @@ const BottomNavigator = () => {
 						iconName = focused ? "fitness" : "fitness-outline";
 					} else if (route.name === "Running") {
 						iconName = focused ? "footsteps" : "footsteps-outline";
+					} else if (route.name === "RunningHistory") {
+						iconName = focused ? "book" : "book-outline";
 					}
 
 					return <Ionicons name={iconName} size={size} color={color} />;

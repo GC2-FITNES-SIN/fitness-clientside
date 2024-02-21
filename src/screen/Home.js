@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Image } from "react-native";
 import { Container, Button, ScrollView, ContainerFlexSameFlex, TextCustom } from "./Styled";
 import PieChartCustom from "../components/PieChartCustom";
 import OverlayImage from "../components/OverlayImage";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AuthContext from "../store/Auth";
+import { useNavigation } from "@react-navigation/native";
 const Home = () => {
+	const { bmi } = useContext(AuthContext);
+	const { navigate } = useNavigation();
+
 	return (
 		<ScrollView>
 			<ContainerFlexSameFlex $padding={"0"}>
@@ -37,7 +42,7 @@ const Home = () => {
 							<TextCustom $fontSize={"12.5px"} $textAlign={"left"} $color={"#fff"}>
 								Your Body Mass Index is{" "}
 								<TextCustom $color={"#bd54eb"} $fontSize={"15px"}>
-									Overweight
+									{bmi?.result}
 								</TextCustom>
 							</TextCustom>
 							<Button
@@ -56,6 +61,7 @@ const Home = () => {
 									elevation: 3,
 									marginTop: 5,
 								}}
+								onPress={() => navigate("Profile")}
 							>
 								<TextCustom $fontSize={"12.5px"} $color={"white"} $textAlign={"center"}>
 									Show More
@@ -63,7 +69,7 @@ const Home = () => {
 							</Button>
 						</ContainerFlexSameFlex>
 					</ContainerFlexSameFlex>
-					<PieChartCustom />
+					<PieChartCustom data={bmi?.result} />
 				</ContainerFlexSameFlex>
 				{/* Banner */}
 				<ContainerFlexSameFlex $padding={"0 20px 20px "} $column $gap={"15px"}>
@@ -80,7 +86,7 @@ const Home = () => {
 							<TextCustom $textAlign={"left"} $fontWeight={"bold"} $fontSize={"20px"}>
 								Weight Loss Starter
 							</TextCustom>
-							<Button $width={"fit-content"} $padding={"7.5px 25px"} $borderRadius={"50px"} $backgroundColor={"#bd54eb"}>
+							<Button onPress={() => navigate("Routines")} $width={"fit-content"} $padding={"7.5px 25px"} $borderRadius={"50px"} $backgroundColor={"#bd54eb"}>
 								<TextCustom>View More</TextCustom>
 							</Button>
 						</ContainerFlexSameFlex>

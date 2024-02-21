@@ -3,11 +3,11 @@ import * as SecureStore from "expo-secure-store";
 import { Container, ContainerFlexSameFlex, ScrollView, TextCustom } from "./Styled";
 import AreaChart from "../components/AreaChart";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Axios } from "../utils";
+import { Axios, roundNumber, ymd } from "../utils";
 
 const HistoryRunning = () => {
 	const [history, setHistory] = useState([]);
-	const test = SecureStore.getItem("access_Token");
+	const test = SecureStore.getItem("access_token");
 
 	const fetchDataHistory = async () => {
 		try {
@@ -40,7 +40,7 @@ const HistoryRunning = () => {
 						<TextCustom $textAlign={"left"} $color={"#bd54eb"}>
 							Running History
 						</TextCustom>
-						<AreaChart />
+						{history.length > 0 && <AreaChart data={history} />}
 					</ContainerFlexSameFlex>
 					{/* Card History Running */}
 					{history.length > 0 &&
@@ -51,7 +51,7 @@ const HistoryRunning = () => {
 									<ContainerFlexSameFlex $padding={"15px"} $gap={"15px"} $borderRadius={"16px"} $backgroundColor={"#fff"} key={i}>
 										<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
 											<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-												Durations 1
+												Durations
 											</TextCustom>
 											<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
 												{item.duration} min
@@ -59,10 +59,10 @@ const HistoryRunning = () => {
 										</ContainerFlexSameFlex>
 										<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
 											<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-												Running Distance
+												Distance
 											</TextCustom>
 											<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-												12 KM
+												{roundNumber(item.distance)} KM
 											</TextCustom>
 										</ContainerFlexSameFlex>
 										<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
@@ -78,7 +78,7 @@ const HistoryRunning = () => {
 												Date
 											</TextCustom>
 											<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-												02-02-2024
+												{ymd(item.createdAt)}
 											</TextCustom>
 										</ContainerFlexSameFlex>
 									</ContainerFlexSameFlex>
@@ -87,142 +87,6 @@ const HistoryRunning = () => {
 						})}
 
 					{/* end loop */}
-					<ContainerFlexSameFlex $padding={"15px"} $gap={"15px"} $borderRadius={"16px"} $backgroundColor={"#fff"}>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Durations
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								51 min
-							</TextCustom>
-						</ContainerFlexSameFlex>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Running Distance
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								12 KM
-							</TextCustom>
-						</ContainerFlexSameFlex>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Location
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								XXXXX
-							</TextCustom>
-						</ContainerFlexSameFlex>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Date
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								02-02-2024
-							</TextCustom>
-						</ContainerFlexSameFlex>
-					</ContainerFlexSameFlex>
-					<ContainerFlexSameFlex $padding={"15px"} $gap={"15px"} $borderRadius={"16px"} $backgroundColor={"#fff"}>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Durations
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								51 min
-							</TextCustom>
-						</ContainerFlexSameFlex>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Running Distance
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								12 KM
-							</TextCustom>
-						</ContainerFlexSameFlex>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Location
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								XXXXX
-							</TextCustom>
-						</ContainerFlexSameFlex>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Date
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								02-02-2024
-							</TextCustom>
-						</ContainerFlexSameFlex>
-					</ContainerFlexSameFlex>
-					<ContainerFlexSameFlex $padding={"15px"} $gap={"15px"} $borderRadius={"16px"} $backgroundColor={"#fff"}>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Durations
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								51 min
-							</TextCustom>
-						</ContainerFlexSameFlex>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Running Distance
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								12 KM
-							</TextCustom>
-						</ContainerFlexSameFlex>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Location
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								XXXXX
-							</TextCustom>
-						</ContainerFlexSameFlex>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Date
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								02-02-2024
-							</TextCustom>
-						</ContainerFlexSameFlex>
-					</ContainerFlexSameFlex>
-					<ContainerFlexSameFlex $padding={"15px"} $gap={"15px"} $borderRadius={"16px"} $backgroundColor={"#fff"}>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Durations
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								51 min
-							</TextCustom>
-						</ContainerFlexSameFlex>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Running Distance
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								12 KM
-							</TextCustom>
-						</ContainerFlexSameFlex>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Location
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								XXXXX
-							</TextCustom>
-						</ContainerFlexSameFlex>
-						<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
-							<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-								Date
-							</TextCustom>
-							<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-								02-02-2024
-							</TextCustom>
-						</ContainerFlexSameFlex>
-					</ContainerFlexSameFlex>
 				</Container>
 			</ScrollView>
 		</SafeAreaView>
