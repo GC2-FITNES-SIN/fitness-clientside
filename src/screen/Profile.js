@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import AuthContext from "../store/Auth";
 
 const Profile = () => {
+	const { profile, setProfile } = useContext(AuthContext);
 	const pressHandler = () => {
 		console.log("touch");
 	};
@@ -21,7 +22,7 @@ const Profile = () => {
 						<ProfileRounded src="https://plus.unsplash.com/premium_photo-1689703068866-5fcba89130ca?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8" />
 						<ContainerFlexSameFlex $flex={2} $column>
 							<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
-								Stefani Wong
+								{profile.username}
 							</TextCustom>
 							<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
 								Lose Fat Program
@@ -54,7 +55,7 @@ const Profile = () => {
 							}}
 						>
 							<TextCustom $color={"#bd54eb"} $fontSize={"15px"}>
-								180 cm
+								{profile.height} cm
 							</TextCustom>
 							<TextCustom $fontSize={"12.5px"}>Height</TextCustom>
 						</ContainerFlexSameFlex>
@@ -76,9 +77,9 @@ const Profile = () => {
 							}}
 						>
 							<TextCustom $color={"#bd54eb"} $fontSize={"15px"}>
-								180 cm
+								{profile.weight} kg
 							</TextCustom>
-							<TextCustom $fontSize={"12.5px"}>Height</TextCustom>
+							<TextCustom $fontSize={"12.5px"}>Weight</TextCustom>
 						</ContainerFlexSameFlex>
 						<ContainerFlexSameFlex
 							$column
@@ -98,9 +99,9 @@ const Profile = () => {
 							}}
 						>
 							<TextCustom $color={"#bd54eb"} $fontSize={"15px"}>
-								180 cm
+								{profile.age}
 							</TextCustom>
-							<TextCustom $fontSize={"12.5px"}>Height</TextCustom>
+							<TextCustom $fontSize={"12.5px"}>Age</TextCustom>
 						</ContainerFlexSameFlex>
 					</ContainerFlexSameFlex>
 
@@ -128,6 +129,7 @@ const Profile = () => {
 							Overweight
 						</TextCustom>
 						<ContainerFlexSameFlex $justifyContent={"center"}>
+							{/* logic condition */}
 							<Image source={require("../../assets/obes.png")} style={{ width: 100, height: 100, objectFit: "contain" }} />
 						</ContainerFlexSameFlex>
 					</ContainerFlexSameFlex>
@@ -156,7 +158,7 @@ const Profile = () => {
 								Name
 							</TextCustom>
 							<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-								Stefani Wong
+								{profile.name ? profile.name : "-"}
 							</TextCustom>
 						</ContainerFlexSameFlex>
 						<ContainerFlexSameFlex $column>
@@ -164,7 +166,7 @@ const Profile = () => {
 								Username
 							</TextCustom>
 							<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-								Stefani Wong
+								{profile.username ? profile.username : "-"}
 							</TextCustom>
 						</ContainerFlexSameFlex>
 						<ContainerFlexSameFlex $column>
@@ -172,7 +174,7 @@ const Profile = () => {
 								Email
 							</TextCustom>
 							<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-								StefaniWong@gmail.com
+								{profile.email}
 							</TextCustom>
 						</ContainerFlexSameFlex>
 						<ContainerFlexSameFlex $column>
@@ -180,7 +182,7 @@ const Profile = () => {
 								Phone Number
 							</TextCustom>
 							<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-								0812xxxxx
+								{profile.phonenumber ? profile.phonenumber : "-"}
 							</TextCustom>
 						</ContainerFlexSameFlex>
 						<ContainerFlexSameFlex $column>
@@ -188,7 +190,7 @@ const Profile = () => {
 								Gender
 							</TextCustom>
 							<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-								Non Biner
+								{profile.gender ? profile.gender : "-"}
 							</TextCustom>
 						</ContainerFlexSameFlex>
 						<ContainerFlexSameFlex $column>
@@ -196,7 +198,7 @@ const Profile = () => {
 								Weight
 							</TextCustom>
 							<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-								70 Kg
+								{profile.weight} Kg
 							</TextCustom>
 						</ContainerFlexSameFlex>
 						<ContainerFlexSameFlex $column>
@@ -204,15 +206,7 @@ const Profile = () => {
 								Height
 							</TextCustom>
 							<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-								168
-							</TextCustom>
-						</ContainerFlexSameFlex>
-						<ContainerFlexSameFlex $column>
-							<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
-								Weight
-							</TextCustom>
-							<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-								70 Kg
+								{profile.height} cm
 							</TextCustom>
 						</ContainerFlexSameFlex>
 					</ContainerFlexSameFlex>

@@ -26,11 +26,12 @@ const Login = () => {
 
 			await SecureStore.setItemAsync("access_Token", data.access_Token);
 
-			const { access_Token, ...profile } = data;
+			const { access_Token, ...user } = data;
 
-			console.log(profile);
+			// console.log(user);
 
-			SecureStore.setItem("profile", JSON.stringify(profile));
+			await SecureStore.setItemAsync("user", JSON.stringify(user));
+			setProfile(user);
 			// setProfile(profile);
 			setLogin(true);
 		} catch (error) {

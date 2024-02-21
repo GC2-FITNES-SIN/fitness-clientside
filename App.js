@@ -7,6 +7,7 @@ export default function App() {
 	const [login, setLogin] = useState(false);
 	const [profile, setProfile] = useState();
 
+	console.log(profile, "<<<< profile");
 	useEffect(() => {
 		SecureStore.getItemAsync("access_Token").then((res) => {
 			if (res) {
