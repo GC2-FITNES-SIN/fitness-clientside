@@ -13,6 +13,8 @@ const Profile = () => {
 
 	const { setLogin } = useContext(AuthContext);
 
+	// console.log(profile, "<<< profile screen", typeof profile);
+
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<ScrollView>
@@ -55,7 +57,7 @@ const Profile = () => {
 							}}
 						>
 							<TextCustom $color={"#bd54eb"} $fontSize={"15px"}>
-								{profile.height} cm
+								{profile.height ? profile.height : "-"} cm
 							</TextCustom>
 							<TextCustom $fontSize={"12.5px"}>Height</TextCustom>
 						</ContainerFlexSameFlex>
