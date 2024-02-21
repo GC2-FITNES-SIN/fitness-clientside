@@ -1,8 +1,9 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { LineChart } from "react-native-gifted-charts";
+import { roundNumber } from "../utils";
 
-const AreaChart = () => {
+const AreaChart = (data) => {
 	const data1 = [
 		{ date: "Nov", value: 70 },
 		{ date: "Nov", value: 36 },
@@ -11,14 +12,16 @@ const AreaChart = () => {
 		{ date: "Nov", value: 18 },
 		{ date: "Nov", value: 38 },
 	];
-	const data2 = [
-		{ date: "Nov", value: 50 },
-		{ date: "Nov", value: 10 },
-		{ date: "Nov", value: 45 },
-		{ date: "Nov", value: 30 },
-		{ date: "Nov", value: 45 },
-		{ date: "Nov", value: 18 },
-	];
+
+	const dataConvert = data.data.map((el, i) => {
+		console.log(el);
+		return {
+			date: `${new Date(el.createdAt).toLocaleString("default", { month: "short" })}-${new Date(el.createdAt).getDate()}`,
+			duration: +el.duration,
+			value: roundNumber(el.distance),
+		};
+	});
+
 	return (
 		<View
 			style={{
@@ -29,8 +32,7 @@ const AreaChart = () => {
 			<LineChart
 				areaChart
 				curved
-				data={data1}
-				data2={data2}
+				data={dataConvert}
 				hideDataPoints
 				spacing={68}
 				color1="#8a56ce"
@@ -72,9 +74,8 @@ const AreaChart = () => {
 								}}
 							>
 								<Text style={{ color: "lightgray", fontSize: 12 }}>{items[0].date}</Text>
-								<Text style={{ color: "white", fontWeight: "bold" }}>{items[0].value}</Text>
-								<Text style={{ color: "lightgray", fontSize: 12, marginTop: 12 }}>{items[1].date}</Text>
-								<Text style={{ color: "white", fontWeight: "bold" }}>{items[1].value}</Text>
+								<Text style={{ color: "white", fontWeight: "bold" }}>{items[0].distance}</Text>
+								<Text style={{ color: "white", fontWeight: "bold" }}>{items[0].duration}</Text>
 							</View>
 						);
 					},

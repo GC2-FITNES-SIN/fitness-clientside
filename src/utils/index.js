@@ -4,7 +4,7 @@ import * as SecureStore from "expo-secure-store";
 export const Axios = axios.create({
 	baseURL: "http://34.101.140.227",
 	headers: {
-		Authorization: `Bearer ${SecureStore.getItem("access_Token")}`,
+		Authorization: `Bearer ${SecureStore.getItem("access_token")}`,
 		"content-type": "application/x-www-form-urlencoded",
 	},
 });
@@ -31,11 +31,11 @@ export const roundNumber = (number) => {
 };
 
 export const calculateBMI = (weight, height, gender) => {
-	if (!weight || !height) return {};
+	if (!weight || !height) return;
 	let img;
-	const bmi = weight / ((height / 100) * (height / 100));
+	const bmi = +weight / ((+height / 100) * (+height / 100));
 	const result = bmiCategory(bmi);
-	const ideal = idealWeight(height, gender);
+	const ideal = idealWeight(+height, gender);
 
 	switch (result) {
 		case "Underweight":
@@ -55,12 +55,14 @@ export const calculateBMI = (weight, height, gender) => {
 			break;
 	}
 
-	return {
+	const res = {
 		bmi,
 		result,
 		img,
 		ideal,
 	};
+
+	return res;
 };
 
 const bmiCategory = (bmi) => {
@@ -83,4 +85,8 @@ const idealWeight = (height, gender) => {
 	} else {
 		return null;
 	}
+};
+
+export const ymd = (date) => {
+	return new Date(date).toISOString().slice(0, 10);
 };

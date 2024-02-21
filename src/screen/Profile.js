@@ -6,14 +6,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import AuthContext from "../store/Auth";
 
 const Profile = () => {
-	const { profile, setProfile } = useContext(AuthContext);
+	const { profile, setProfile, bmi, setLogin, setBmi } = useContext(AuthContext);
 	const pressHandler = () => {
 		console.log("touch");
 	};
 
-	const { setLogin } = useContext(AuthContext);
-
-	// console.log(profile, "<<< profile screen", typeof profile);
+	console.log(profile, "<<< profile screen", bmi, "<<< bmi", typeof bmi);
 
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
@@ -79,7 +77,7 @@ const Profile = () => {
 							}}
 						>
 							<TextCustom $color={"#bd54eb"} $fontSize={"15px"}>
-								{profile.weight} kg
+								{profile?.weight} kg
 							</TextCustom>
 							<TextCustom $fontSize={"12.5px"}>Weight</TextCustom>
 						</ContainerFlexSameFlex>
@@ -101,7 +99,7 @@ const Profile = () => {
 							}}
 						>
 							<TextCustom $color={"#bd54eb"} $fontSize={"15px"}>
-								{profile.age}
+								{profile?.age}
 							</TextCustom>
 							<TextCustom $fontSize={"12.5px"}>Age</TextCustom>
 						</ContainerFlexSameFlex>
@@ -131,8 +129,11 @@ const Profile = () => {
 							Overweight
 						</TextCustom>
 						<ContainerFlexSameFlex $justifyContent={"center"}>
-							{/* logic condition */}
 							<Image source={require("../../assets/obes.png")} style={{ width: 100, height: 100, objectFit: "contain" }} />
+						</ContainerFlexSameFlex>
+						<ContainerFlexSameFlex $column $gap={"10px"} $justifyContent={"center"}>
+							<TextCustom>Your ideal weight :</TextCustom>
+							<TextCustom $color={"#bd54eb"}>{bmi.ideal}</TextCustom>
 						</ContainerFlexSameFlex>
 					</ContainerFlexSameFlex>
 
@@ -160,7 +161,7 @@ const Profile = () => {
 								Name
 							</TextCustom>
 							<TextCustom $fontSize={"12.5px"} $textAlign={"left"}>
-								{profile.name ? profile.name : "-"}
+								{profile?.name ? profile.name : "-"}
 							</TextCustom>
 						</ContainerFlexSameFlex>
 						<ContainerFlexSameFlex $column>
@@ -229,8 +230,11 @@ const Profile = () => {
 						}}
 						onPress={async () => {
 							console.log("masuk");
-							SecureStore.deleteItemAsync("access_Token");
+							SecureStore.deleteItemAsync("access_token");
 							SecureStore.deleteItemAsync("profile");
+							SecureStore.deleteItemAsync("bmi");
+							setBmi();
+							setProfile();
 							setLogin(false);
 						}}
 					>

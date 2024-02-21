@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Button, Container, ContainerFlexSameFlex, TextCustom, TextInput } from "./Styled";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as SecureStore from "expo-secure-store";
-import { Axios } from "../utils";
+import { Axios, calculateBMI } from "../utils";
 import AuthContext from "../store/Auth";
 import { useNavigation } from "@react-navigation/native";
 
@@ -10,33 +10,27 @@ const Login = () => {
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
 
-	const { login, setLogin, setProfile } = useContext(AuthContext);
+	const { login, setLogin, setProfile, setBmi } = useContext(AuthContext);
 	const { navigate } = useNavigation();
 
-	console.log(login);
-	const submitForm = async () => {
-		try {
-			const { data } = await Axios({
-				method: "POST",
-				url: "/login",
-				data: { email, password },
-			});
-
-			console.log(data, "<<<<<<");
-
-			await SecureStore.setItemAsync("access_Token", data.access_Token);
-
-			const { access_Token, ...user } = data;
-
-			// console.log(user);
-
-			await SecureStore.setItemAsync("user", JSON.stringify(user));
-			setProfile(user);
-			// setProfile(profile);
-			setLogin(true);
-		} catch (error) {
-			console.log(error);
-		}
+	const submitForm = () => {
+		Axios({
+			method: "POST",
+			url: "/login",
+			data: { email, password },
+		})
+			.then((res) => {
+				const { data } = res;
+				const { access_Token, ...user } = data;
+				SecureStore.setItem("access_token", access_Token);
+				SecureStore.setItem("profile", JSON.stringify(user));
+				const bmi = calculateBMI(user.weight, user.height, user.gender);
+				SecureStore.setItem("bmi", JSON.stringify(bmi));
+				setBmi(bmi);
+				setProfile(user);
+				setLogin(true);
+			})
+			.catch((err) => console.log(err));
 	};
 
 	return (
