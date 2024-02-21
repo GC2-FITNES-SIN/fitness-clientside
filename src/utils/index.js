@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const Axios = axios.create({
-	baseURL: "http://192.168.100.78:3000/",
+	baseURL: "http://192.168.11.69:3000/",
 	headers: {
 		Authorization: `Bearer `,
 		"content-type": "application/x-www-form-urlencoded",

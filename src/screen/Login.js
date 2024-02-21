@@ -11,7 +11,7 @@ const Login = () => {
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
 
-	const { login, setLogin } = useContext(AuthContext);
+	const { login, setLogin, setProfile } = useContext(AuthContext);
 	const { navigate } = useNavigation();
 
 	console.log(login);
@@ -22,6 +22,7 @@ const Login = () => {
 			// 	method: "POST",
 			// 	data: { email, password, username: "fiki" },
 			// });
+			console.log("first");
 
 			const { data } = await Axios({
 				method: "POST",
@@ -29,13 +30,16 @@ const Login = () => {
 				data: { email, password, username: "fiki" },
 			});
 
+			console.log(data, "<<<<<<");
+
 			await SecureStore.setItemAsync("access_Token", data.access_Token);
 
 			const { access_Token, ...profile } = data;
 
 			console.log(profile);
-			SecureStore.setItem("profile", JSON.stringify(profile));
 
+			SecureStore.setItem("profile", JSON.stringify(profile));
+			// setProfile(profile);
 			setLogin(true);
 		} catch (error) {
 			console.log(error);
