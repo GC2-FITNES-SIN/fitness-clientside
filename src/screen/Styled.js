@@ -45,6 +45,7 @@ export const TextCustom = styled.Text`
 	font-weight: ${(props) => (props.$fontWeight ? props.$fontWeight : "normal")};
 	text-align: ${(props) => (props.$textAlign ? props.$textAlign : "center")};
 	width: ${(props) => (props.$width ? props.$width : "100%")};
+	margin: ${(props) => (props.$margin ? props.$margin : "0")};
 `;
 export const ProfileRounded = styled.Image`
 	border-radius: 50px;

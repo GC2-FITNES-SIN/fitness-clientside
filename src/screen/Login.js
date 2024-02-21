@@ -63,6 +63,7 @@ const Login = () => {
 					></TextInput>
 					<TextInput
 						value={password}
+						secureTextEntry
 						onChangeText={setPassword}
 						$backgroundColor={"#F7F8F8"}
 						$borderRadius={"14px"}
