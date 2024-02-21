@@ -2,9 +2,8 @@ import React, { useContext, useState } from "react";
 import { Button, Container, ContainerFlexSameFlex, TextCustom, TextInput } from "./Styled";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as SecureStore from "expo-secure-store";
-import { Axios, verifyToken } from "../utils";
+import { Axios } from "../utils";
 import AuthContext from "../store/Auth";
-import { Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const Login = () => {
@@ -17,17 +16,10 @@ const Login = () => {
 	console.log(login);
 	const submitForm = async () => {
 		try {
-			// const { data } = await axios({
-			// 	url: "http://192.168.100.78:3000/login",
-			// 	method: "POST",
-			// 	data: { email, password, username: "fiki" },
-			// });
-			console.log("first");
-
 			const { data } = await Axios({
 				method: "POST",
 				url: "/login",
-				data: { email, password, username: "fiki" },
+				data: { email, password },
 			});
 
 			console.log(data, "<<<<<<");

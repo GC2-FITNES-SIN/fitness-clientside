@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, ContainerFlexSameFlex, ScrollView, TextCustom } from "./Styled";
 import AreaChart from "../components/AreaChart";
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Axios } from "../utils";
 
 const HistoryRunning = () => {
+	const [history, setHistory] = useState([]);
+
+	const fetchDataHistory = async () => {
+		try {
+			const { data } = await Axios({
+				method: "GET",
+				url: "/user-routines",
+			});
+
+			console.log(data, "=========== history");
+		} catch (err) {
+			console.log(err, "historyrunning");
+		}
+	};
+
+	useEffect(() => {
+		fetchDataHistory();
+	}, []);
+
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<ScrollView>
