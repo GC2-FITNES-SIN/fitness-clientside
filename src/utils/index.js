@@ -1,9 +1,10 @@
 import axios from "axios";
+import * as SecureStore from "expo-secure-store";
 
 export const Axios = axios.create({
 	baseURL: "http://192.168.11.69:3000/",
 	headers: {
-		Authorization: `Bearer `,
+		Authorization: `Bearer ${SecureStore.getItem("access_Token")}`,
 		"content-type": "application/x-www-form-urlencoded",
 	},
 });

@@ -7,96 +7,97 @@ import { Button, Container, ContainerFlexSameFlex, TextCustom } from "./Styled";
 import * as Location from "expo-location";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import { useFocusEffect } from "@react-navigation/core";
+import { Axios } from "../utils";
 export default function Running() {
 	const [isRunning, setIsRunning] = useState(false);
 	const [location, setLocation] = useState([]);
 	const [time, setTime] = useState(0);
 	const [errorMsg, setErrorMsg] = useState("");
+	const [status, setStatus] = useState("");
 
 	// const key = process.env.API_MAP_KEY;
 	const key = "AIzaSyAY8BQuOsrMtH090joCx6JV7Nkn_AT0xnA";
 
-	const isRunningToggle = () => {
-		// for reset the data after toggle
+	const isRunningToggle = async () => {
 		if (isRunning) {
-			setLocation([]);
-			setTime(0);
+			await pushRunning();
 		}
+
+		// setLocation([]);
 		setIsRunning(!isRunning);
 	};
 
-	const intervalLocation = () => {
-		setInterval(() => {
-			setLocation((location) => [...location, location.coords]);
-		}, 10000);
+	const pushRunning = async () => {
+		try {
+			let body = { cordinates: location, duration: time };
+			body.cordinates.push({ latitude: 38.4220936, longitude: -121.7145457 });
+			console.log("body running: ", body);
+			await Axios({
+				method: "POST",
+				url: "/running-history",
+				data: body,
+			});
+
+			console.log("success post");
+		} catch (error) {
+			console.log("error axios: ", error);
+		}
 	};
-
-	const intervalTime = () => {
-		setInterval(() => {
-			setTime(time + 1);
-		}, 1000);
-	};
-
-	// useFocusEffect(async () => {
-	// let { status } = await Location.requestForegroundPermissionsAsync();
-	// if (status !== "granted") {
-	// 	setErrorMsg("Permission to access location was denied");
-	// 	return;
-	// }
-
-	// if (status == "granted") {
-	// 	if (isRunning) {
-	// 		intervalTime();
-	// 		let location = await Location.getCurrentPositionAsync({});
-	// 		setLocation(location);
-	// 	}
-	// }
-
-	// 	return () => {
-	// 		clearInterval(intervalLocation, intervalTime);
-	// 	};
-	// }, [time]);
 
 	useFocusEffect(
 		useCallback(() => {
-			let status, location;
-
-			Location.requestForegroundPermissionsAsync().then((res) => {
-				status = res.status;
-			});
 			if (status !== "granted") {
 				setErrorMsg("Permission to access location was denied");
 				return;
 			}
 
+			let intervalLocation, intervalTime;
 			if (status == "granted") {
 				if (isRunning) {
-					intervalTime();
-					Location.getCurrentPositionAsync({}).then((res) => (location = res));
-					setLocation(location);
+					console.log("masuk granted scope true: ", intervalLocation, isRunning, "============", location.length);
+					if (location.length === 0) {
+						Location.getCurrentPositionAsync({}).then((res) => {
+							setLocation([{ latitude: res.coords.latitude, longitude: res.coords.longitude }]);
+						});
+					}
+					intervalLocation = setInterval(async () => {
+						const currLocation = await Location.getCurrentPositionAsync({});
+						console.log(currLocation);
+
+						setLocation((prevValue) => {
+							return [...prevValue, { latitude: currLocation.coords.latitude, longitude: currLocation.coords.longitude }];
+						});
+					}, 10000);
+
+					intervalTime = setInterval(() => {
+						setTime((prevValue) => prevValue + 1);
+					}, 1000);
 				}
 			}
 
-			return () => clearInterval(intervalLocation, intervalTime);
-		}, [])
+			return async () => {
+				clearInterval(intervalLocation);
+				clearInterval(intervalTime);
+				const currLocation = await Location.getCurrentPositionAsync({});
+				setLocation((prevValue) => {
+					return [...prevValue, { latitude: currLocation.coords.latitude, longitude: currLocation.coords.longitude }];
+				});
+			};
+		}, [status, isRunning])
 	);
 
-	// useEffect(() => {
-	// 	(async () => {
-	// 		let { status } = await Location.requestForegroundPermissionsAsync();
-	// 		if (status !== "granted") {
-	// 			setErrorMsg("Permission to access location was denied");
-	// 			return;
-	// 		}
-	// 	})();
-	// }, [isRunning]);
+	useEffect(() => {
+		Location.requestForegroundPermissionsAsync().then((res) => {
+			setStatus(res.status);
+		});
+	}, []);
 
-	console.log(isRunning, "<<", location, time, key);
+	console.log(isRunning, time, location, "===============");
 
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<Container $padding={"15px"} $backgroundColor={"#1b1b1d"}>
-				{isRunning && (
+				{!isRunning && location.length != 0 && (
 					<ContainerFlexSameFlex
 						$column
 						$justifyContent={"center"}
@@ -150,17 +151,17 @@ export default function Running() {
 						}}
 						style={StyleSheet.absoluteFill}
 					>
-						<MapViewDirections
+						{/* <MapViewDirections
 							origin={{ latitude: -6.26051972136238, longitude: 106.78170206252449 }}
 							destination={{ longitude: -6.263254134008508, latitude: 106.7822867640354 }}
 							optimizeWaypoints={true}
 							apikey="AIzaSyAY8BQuOsrMtH090joCx6JV7Nkn_AT0xnA"
 							strokeColor="hotPink"
 							strokeWidth={3}
-						/>
+						/> */}
 					</MapView>
 				</ContainerFlexSameFlex>
-				{isRunning && (
+				{!isRunning && location.length != 0 && (
 					<ContainerFlexSameFlex
 						$backgroundColor={"white"}
 						$gap={"5px"}
