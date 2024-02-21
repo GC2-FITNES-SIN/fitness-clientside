@@ -27,7 +27,7 @@ const MainStack = () => {
 						<Stack.Screen name="Routines" component={Routines} options={{ headerShown: false }} />
 						<Stack.Screen name="Running" component={Running} options={{ headerShown: false }} />
 						<Stack.Screen name="RunningHistory" component={HistoryRunning} options={{ headerShown: false }} />
-						<Stack.Screen name="DetailRoutine" component={DetailRoutine} options={{ headerShown: false }} />
+						<Stack.Screen name="DetailRoutine" component={DetailRoutine}/>
 					</>
 				) : (
 					<>

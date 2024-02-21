@@ -48,7 +48,6 @@ const BottomNavigator = () => {
 			<Tab.Screen name="Routines" component={Routines} />
 			<Tab.Screen name="Running" component={Running} />
 			<Tab.Screen name="RunningHistory" component={HistoryRunning} />
-			<Tab.Screen name="DetailRoutine" component={DetailRoutine} />
 		</Tab.Navigator>
 	);
 };

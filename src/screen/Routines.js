@@ -1,24 +1,42 @@
 import React, { useEffect, useState } from "react";
-import { Container, ContainerFlexSameFlex, ScrollView, TextCustom } from "./Styled";
-import { Image } from "react-native";
+import { Button, Container, ContainerFlexSameFlex, ScrollView, TextCustom } from "./Styled";
+import { Image, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import axios from "axios";
 import * as SecureStore from 'expo-secure-store'
+import { useNavigation } from '@react-navigation/native';
 
 const Routines = () => {
-	const [routines, setRoutines] = useState([]);
+	const [routinesCat, setRoutinesCat] = useState({
+		underweight: [],
+		normal: [],
+		overweight: [],
+		obesity: []
+	})
 	const fetch = async (value) => {
 		try {
 			const { data } = await axios({
-				url: "https://4a12-139-228-111-126.ngrok-free.app/routines",
+				url: "https://9ebf-2a09-bac1-3480-18-00-da-76.ngrok-free.app/routines",
 				method: "GET",
 				headers: {
 					Authorization: "Bearer " + SecureStore.getItem("access_token"),
 				},
 			});
-			console.log(data, "<<< INI DATA ROUTINE");
-			setRoutines(data);
+
+			let hasil = {}
+
+			data.data.forEach((el, i) => {
+				if (!hasil[el.category]) hasil[el.category] = []
+
+				hasil[el.category].push(el)
+
+			})
+
+			setRoutinesCat({ ...routinesCat, ...hasil })
+
+
+			// setRoutines(data);
 		} catch (error) {
 			console.log(error, '<<< error');
 		}
@@ -27,148 +45,187 @@ const Routines = () => {
 	useEffect(() => {
 		fetch();
 	}, []);
+
+	const navigation = useNavigation()
 	return (
+
 		<SafeAreaView style={{ flex: 1 }}>
 			<StatusBar backgroundColor="#1b1b1d" barStyle="light-content" />
 			<ScrollView>
-				<Container>
+				<Container $backgroundColor={"#1b1b1d"}>
 					<ContainerFlexSameFlex $column $backgroundColor={"#1b1b1d"} $padding={"15px"} $gap={"15px"}>
 						<TextCustom $textAlign={"left"} $color={"#bd54eb"}>
 							Workout Routines
 						</TextCustom>
 						{/* loop here */}
-						<ContainerFlexSameFlex $column $gap={"5px"}>
+
+						<ContainerFlexSameFlex $column $gap={"10px"}>
 							<TextCustom $fontSize={"24px"} $color={"white"} $fontWeight={"700"} $textAlign={"left"}>
 								Obesity
 							</TextCustom>
-							<ContainerFlexSameFlex $width={"100%"} $borderRadius={"16px"} $flex={"1"}>
-								<ContainerFlexSameFlex $flex={"1"} $width={"150px"} $height={"150px"} style={{ position: "relative", overflow: "hidden" }}>
-									<Image
-										source={{
-											uri: "https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9keSUyMG1hc3MlMjBpbmRleCUyMGZpdG5lc3N8ZW58MHx8MHx8fDA%3D",
-										}}
-										style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 16, zIndex: 10 }}
-									/>
-								</ContainerFlexSameFlex>
-								<ContainerFlexSameFlex $flex={"1"} $width={"150px"} $height={"150px"} style={{ position: "relative" }}>
-									<Image
-										source={{
-											uri: "https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9keSUyMG1hc3MlMjBpbmRleCUyMGZpdG5lc3N8ZW58MHx8MHx8fDA%3D",
-										}}
-										style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 16, zIndex: 10 }}
-									/>
-								</ContainerFlexSameFlex>
-								<ContainerFlexSameFlex $flex={"1"} $width={"150px"} $height={"150px"} style={{ position: "relative" }}>
-									<Image
-										source={{
-											uri: "https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9keSUyMG1hc3MlMjBpbmRleCUyMGZpdG5lc3N8ZW58MHx8MHx8fDA%3D",
-										}}
-										style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 16, zIndex: 10 }}
-									/>
-								</ContainerFlexSameFlex>
-							</ContainerFlexSameFlex>
+							{
+								routinesCat.obesity.slice(0, 5).map(el => {
+									return (
+										<>
+											<Button $backgroundColor="transparent" $padding={"0px"} onPress={() => navigation.navigate("DetailRoutine", { id: el._id })}>
+												<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} $backgroundColor={"#bd54eb"} style={{ position: "relative", zIndex: 1 }}>
+													<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
+														<Image
+															source={{
+																uri: el.routineImageStart
+															}}
+															style={{ width: "100%", height: "100%", objectFit: "fill" }}
+														/>
+													</ContainerFlexSameFlex>
+													<ContainerFlexSameFlex $column >
+														<ContainerFlexSameFlex $height={"50%"}>
+															<TextCustom $fontSize={"16px"} $fontWeight={"bold"}>
+																{el.routineName}
+															</TextCustom>
+														</ContainerFlexSameFlex>
+														<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
+															<Button $width={"100%"} $backgroundColor={"#fff"} $borderRadius={"8px"} style={{ zIndex: 9999, position: "relative" }}>
+																<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
+																	Add Routine
+																</TextCustom>
+															</Button >
+														</ContainerFlexSameFlex>
+													</ContainerFlexSameFlex>
+												</ContainerFlexSameFlex>
+											</Button>
+										</>
+									)
+								})
+							}
 						</ContainerFlexSameFlex>
 						{/* end loop*/}
 
-						<ContainerFlexSameFlex $column>
+						<ContainerFlexSameFlex $column $gap={"10px"}>
 							<TextCustom $fontSize={"24px"} $color={"white"} $fontWeight={"700"} $textAlign={"left"}>
-								OverWeight
+								Overweight
 							</TextCustom>
-							<ContainerFlexSameFlex $width={"100%"} $borderRadius={"16px"} $flex={"1"}>
-								<ContainerFlexSameFlex $flex={"1"} $width={"150px"} $height={"150px"} style={{ position: "relative" }}>
-									<Image
-										source={{
-											uri: "https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9keSUyMG1hc3MlMjBpbmRleCUyMGZpdG5lc3N8ZW58MHx8MHx8fDA%3D",
-										}}
-										style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 16, zIndex: 10 }}
-									/>
-								</ContainerFlexSameFlex>
-								<ContainerFlexSameFlex $flex={"1"} $width={"150px"} $height={"150px"} style={{ position: "relative" }}>
-									<Image
-										source={{
-											uri: "https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9keSUyMG1hc3MlMjBpbmRleCUyMGZpdG5lc3N8ZW58MHx8MHx8fDA%3D",
-										}}
-										style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 16, zIndex: 10 }}
-									/>
-								</ContainerFlexSameFlex>
-								<ContainerFlexSameFlex $flex={"1"} $width={"150px"} $height={"150px"} style={{ position: "relative" }}>
-									<Image
-										source={{
-											uri: "https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9keSUyMG1hc3MlMjBpbmRleCUyMGZpdG5lc3N8ZW58MHx8MHx8fDA%3D",
-										}}
-										style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 16, zIndex: 10 }}
-									/>
-								</ContainerFlexSameFlex>
-							</ContainerFlexSameFlex>
+							{
+
+								routinesCat.overweight.slice(0, 5).map(el => {
+									return (
+										<>
+											<Button $backgroundColor="transparent" $padding={"0px"} >
+												<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} $backgroundColor={"#bd54eb"} style={{ position: "relative", zIndex: 1 }}>
+													<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
+														<Image
+															source={{
+																uri: el.routineImageStart
+															}}
+															style={{ width: "100%", height: "100%", objectFit: "fill", zIndex: 10 }}
+														/>
+													</ContainerFlexSameFlex>
+													<ContainerFlexSameFlex $column >
+														<ContainerFlexSameFlex $height={"50%"}>
+															<TextCustom $fontSize={"16px"} $fontWeight={"bold"}>
+																{el.routineName}
+															</TextCustom>
+														</ContainerFlexSameFlex>
+														<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
+															<Button $width={"100%"} $backgroundColor={"#fff"} $borderRadius={"8px"} style={{ zIndex: 9999, position: "relative" }}>
+																<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
+																	Add Routine
+																</TextCustom>
+															</Button >
+														</ContainerFlexSameFlex>
+													</ContainerFlexSameFlex>
+												</ContainerFlexSameFlex>
+											</Button >
+										</>
+									)
+								})
+							}
 						</ContainerFlexSameFlex>
 
-						<ContainerFlexSameFlex $column>
+						<ContainerFlexSameFlex $column $gap={"10px"}>
 							<TextCustom $fontSize={"24px"} $color={"white"} $fontWeight={"700"} $textAlign={"left"}>
 								Normal
 							</TextCustom>
-							<ContainerFlexSameFlex $width={"100%"} $borderRadius={"16px"} $flex={"1"}>
-								<ContainerFlexSameFlex $flex={"1"} $width={"150px"} $height={"150px"} style={{ position: "relative" }}>
-									<Image
-										source={{
-											uri: "https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9keSUyMG1hc3MlMjBpbmRleCUyMGZpdG5lc3N8ZW58MHx8MHx8fDA%3D",
-										}}
-										style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 16, zIndex: 10 }}
-									/>
-								</ContainerFlexSameFlex>
-								<ContainerFlexSameFlex $flex={"1"} $width={"150px"} $height={"150px"} style={{ position: "relative" }}>
-									<Image
-										source={{
-											uri: "https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9keSUyMG1hc3MlMjBpbmRleCUyMGZpdG5lc3N8ZW58MHx8MHx8fDA%3D",
-										}}
-										style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 16, zIndex: 10 }}
-									/>
-								</ContainerFlexSameFlex>
-								<ContainerFlexSameFlex $flex={"1"} $width={"150px"} $height={"150px"} style={{ position: "relative" }}>
-									<Image
-										source={{
-											uri: "https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9keSUyMG1hc3MlMjBpbmRleCUyMGZpdG5lc3N8ZW58MHx8MHx8fDA%3D",
-										}}
-										style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 16, zIndex: 10 }}
-									/>
-								</ContainerFlexSameFlex>
-							</ContainerFlexSameFlex>
+							{
+
+								routinesCat.normal.slice(0, 5).map(el => {
+									return (
+										<>
+										<Button $backgroundColor="transparent" $padding={"0px"} >
+											<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} $backgroundColor={"#bd54eb"} style={{ position: "relative", zIndex: 1 }}>
+												<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
+													<Image
+														source={{
+															uri: el.routineImageStart
+														}}
+														style={{ width: "100%", height: "100%", objectFit: "fill", zIndex: 10 }}
+													/>
+												</ContainerFlexSameFlex>
+												<ContainerFlexSameFlex $column >
+													<ContainerFlexSameFlex $height={"50%"}>
+														<TextCustom $fontSize={"16px"} $fontWeight={"bold"}>
+															{el.routineName}
+														</TextCustom>
+													</ContainerFlexSameFlex>
+													<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
+														<Button $width={"100%"} $backgroundColor={"#fff"} $borderRadius={"8px"} style={{ zIndex: 9999, position: "relative" }}>
+															<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
+																Add Routine
+															</TextCustom>
+														</Button >
+													</ContainerFlexSameFlex>
+												</ContainerFlexSameFlex>
+											</ContainerFlexSameFlex>
+											</Button>
+										</>
+									)
+								})
+							}
 						</ContainerFlexSameFlex>
 
-						<ContainerFlexSameFlex $column>
+						<ContainerFlexSameFlex $column $gap={"10px"}>
 							<TextCustom $fontSize={"24px"} $color={"white"} $fontWeight={"700"} $textAlign={"left"}>
 								Underweight
 							</TextCustom>
-							<ContainerFlexSameFlex $width={"100%"} $borderRadius={"16px"} $flex={"1"}>
-								<ContainerFlexSameFlex $flex={"1"} $width={"150px"} $height={"150px"} style={{ position: "relative" }}>
-									<Image
-										source={{
-											uri: "https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9keSUyMG1hc3MlMjBpbmRleCUyMGZpdG5lc3N8ZW58MHx8MHx8fDA%3D",
-										}}
-										style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 16, zIndex: 10 }}
-									/>
-								</ContainerFlexSameFlex>
-								<ContainerFlexSameFlex $flex={"1"} $width={"150px"} $height={"150px"} style={{ position: "relative" }}>
-									<Image
-										source={{
-											uri: "https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9keSUyMG1hc3MlMjBpbmRleCUyMGZpdG5lc3N8ZW58MHx8MHx8fDA%3D",
-										}}
-										style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 16, zIndex: 10 }}
-									/>
-								</ContainerFlexSameFlex>
-								<ContainerFlexSameFlex $flex={"1"} $width={"150px"} $height={"150px"} style={{ position: "relative" }}>
-									<Image
-										source={{
-											uri: "https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9keSUyMG1hc3MlMjBpbmRleCUyMGZpdG5lc3N8ZW58MHx8MHx8fDA%3D",
-										}}
-										style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 16, zIndex: 10 }}
-									/>
-								</ContainerFlexSameFlex>
-							</ContainerFlexSameFlex>
+							{
+
+								routinesCat.underweight.slice(0, 5).map(el => {
+									return (
+										<>
+										<Button $backgroundColor="transparent" $padding={"0px"} >
+											<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} $backgroundColor={"#bd54eb"} style={{ position: "relative", zIndex: 1 }}>
+												<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
+													<Image
+														source={{
+															uri: el.routineImageStart
+														}}
+														style={{ width: "100%", height: "100%", objectFit: "fill", zIndex: 10 }}
+													/>
+												</ContainerFlexSameFlex>
+												<ContainerFlexSameFlex $column >
+													<ContainerFlexSameFlex $height={"50%"}>
+														<TextCustom $fontSize={"16px"} $fontWeight={"bold"}>
+															{el.routineName}
+														</TextCustom>
+													</ContainerFlexSameFlex>
+													<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
+														<Button $width={"100%"} $backgroundColor={"#fff"} $borderRadius={"8px"} style={{ zIndex: 9999, position: "relative" }}>
+															<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
+																Add Routine
+															</TextCustom>
+														</Button >
+													</ContainerFlexSameFlex>
+												</ContainerFlexSameFlex>
+											</ContainerFlexSameFlex>
+											</Button>
+										</>
+									)
+								})
+							}
 						</ContainerFlexSameFlex>
 					</ContainerFlexSameFlex>
 				</Container>
 			</ScrollView>
-		</SafeAreaView>
+		</SafeAreaView >
 	);
 };
 
