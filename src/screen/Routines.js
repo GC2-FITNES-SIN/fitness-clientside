@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, ContainerFlexSameFlex, ScrollView, TextCustom } from "./Styled";
 import { Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
+import axios from "axios";
+import * as SecureStore from 'expo-secure-store'
 
 const Routines = () => {
+	const [routines, setRoutines] = useState([]);
+	const fetch = async (value) => {
+		try {
+			const { data } = await axios({
+				url: "https://4a12-139-228-111-126.ngrok-free.app/routines",
+				method: "GET",
+				headers: {
+					Authorization: "Bearer " + SecureStore.getItem("access_token"),
+				},
+			});
+			console.log(data, "<<< INI DATA ROUTINE");
+			setRoutines(data);
+		} catch (error) {
+			console.log(error, '<<< error');
+		}
+	};
+
+	useEffect(() => {
+		fetch();
+	}, []);
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<StatusBar backgroundColor="#1b1b1d" barStyle="light-content" />
