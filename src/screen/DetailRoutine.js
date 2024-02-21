@@ -13,19 +13,21 @@ const DetailRoutine = () => {
 	const [detailRoutine, setDetailRoutine] = useState({});
 	const [currentIndex, setCurrentIndex] = useState(0);
 
-	const images = [
-		{
-			id: "1",
-			uri: detailRoutine.data.routineImageStart,
-			// uri: ""
-		},
-		{
-			id: "2",
-			uri: detailRoutine.data.routineImageEnd,
-			// uri: ""
-		}
-	];
+	let images
+	if (detailRoutine.data) {
+		images = [
+			{
+				id: "1",
+				uri: detailRoutine.data.routineImageStart,
 
+			},
+			{
+				id: "2",
+				uri: detailRoutine.data.routineImageEnd,
+
+			}
+		];
+	}
 	const renderItem = ({ item }) => <Image source={{ uri: item.uri }} style={{ width: 363, height: 500 }} resizeMode="cover" />;
 
 	const onViewableItemsChanged = ({ viewableItems }) => {
@@ -38,7 +40,7 @@ const DetailRoutine = () => {
 	const fetchDetailRoutine = async () => {
 		try {
 			const { data } = await axios({
-				url: `https://9ebf-2a09-bac1-3480-18-00-da-76.ngrok-free.app/routines/${id}`,
+				url: `https://21d4-2a09-bac5-3a20-18c8-00-278-88.ngrok-free.app/routines/${id}`,
 				method: "GET",
 				headers: {
 					Authorization: "Bearer " + SecureStore.getItem("access_token"),
@@ -52,12 +54,12 @@ const DetailRoutine = () => {
 	useEffect(() => {
 		fetchDetailRoutine()
 	}, [])
-	console.log(detailRoutine);
+
 	return (
 
 		<Container $backgroundColor={"#1b1b1d"} $padding={"15px"} $gap={"15px"}>
 			<ContainerFlexSameFlex $flex={"2"} $padding={"0px"}>
-				<FlatList
+				{detailRoutine.data && <FlatList
 					data={images}
 					horizontal
 					pagingEnabled
@@ -67,6 +69,7 @@ const DetailRoutine = () => {
 					onViewableItemsChanged={onViewableItemsChanged}
 					viewabilityConfig={{ itemVisiblePercentThreshold: 50 }}
 				/>
+				}
 				<View
 					style={{
 						flexDirection: "row",
@@ -78,12 +81,12 @@ const DetailRoutine = () => {
 			</ContainerFlexSameFlex>
 			<ContainerFlexSameFlex $backgroundColor={"#bd54eb"} $borderRadius={"20px"} $column>
 				<TextCustom $fontSize={"22px"} $fontWeight={"bold"}>
-					{detailRoutine.data.routineName}
+					{ detailRoutine.data && detailRoutine.data.routineName}
 				</TextCustom>
 				<ContainerFlexSameFlex $justifyContent={"center"} $alignItems={"center"}>
 					<ScrollView>
 						<TextCustom $textAlign={"left"} $fontSize={"18px"}>
-							{detailRoutine.data.routineDescription}
+							{ detailRoutine.data && detailRoutine.data.routineDescription}
 						</TextCustom>
 					</ScrollView>
 				</ContainerFlexSameFlex>
