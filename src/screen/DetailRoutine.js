@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, ContainerFlexSameFlex, ScrollView, TextCustom, TextInput } from "./Styled";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList, Image, View } from "react-native";
+import axios from "axios";
+import * as SecureStore from 'expo-secure-store'
+import { useRoute } from '@react-navigation/native';
+
 
 const images = [
 	{
@@ -18,6 +22,9 @@ const images = [
 	},
 ];
 const DetailRoutine = () => {
+	const route = useRoute()
+    const { id } = route.params
+	const [detailRoutine, setDetailRoutine] = useState({});
 	const [currentIndex, setCurrentIndex] = useState(0);
 
 	const renderItem = ({ item }) => <Image source={{ uri: item.uri }} style={{ width: 363, height: 500 }} resizeMode="cover" />;
@@ -27,6 +34,26 @@ const DetailRoutine = () => {
 			setCurrentIndex(viewableItems[0].index || 0);
 		}
 	};
+
+
+	const fetchDetailRoutine = async () => {
+		try {
+			const { data } = await axios({
+				url: `https://6cdd-2a09-bac1-3480-18-00-da-76.ngrok-free.app/routines/${id}`,
+				method: "GET",
+				headers: {
+					Authorization: "Bearer " + SecureStore.getItem("access_token"),
+				},
+			});
+
+			setDetailRoutine(data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	useEffect(() => {
+		fetchDetailRoutine()
+	}, [])
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<Container $backgroundColor={"#1b1b1d"} $padding={"15px"} $gap={"15px"}>
