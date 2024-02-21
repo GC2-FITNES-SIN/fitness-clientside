@@ -3,11 +3,14 @@ import AuthContext from "./src/store/Auth";
 import MainStack from "./src/navigators/MainStack";
 import { StatusBar } from "react-native";
 import * as SecureStore from "expo-secure-store";
+import { calculateBMI } from "./src/utils";
 export default function App() {
 	const [login, setLogin] = useState(false);
 	const [profile, setProfile] = useState();
 
-	console.log(profile, "<<<< profile");
+	const [bmi, setBmi] = useState(calculateBMI(profile?.weight, profile?.height));
+
+	console.log(profile, "<<<< profile", bmi);
 	useEffect(() => {
 		SecureStore.getItemAsync("access_Token").then((res) => {
 			if (res) {
