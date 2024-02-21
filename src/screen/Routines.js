@@ -40,6 +40,27 @@ const Routines = () => {
 		}
 	};
 
+	const addRoutines = async (id) => {
+		console.log("clicked", id);
+		try {
+			const data = await axios({
+				url: "http://34.101.140.227/user-routines",
+				method: "POST",
+				headers: {
+					Authorization: "Bearer " + SecureStore.getItem("access_token"),
+				},
+				data: {
+					RoutineId: id,
+					scheduleDate: new Date(),
+				},
+			});
+
+			console.log(data);
+		} catch (err) {
+			console.log(err, "<<< error");
+		}
+	};
+
 	useEffect(() => {
 		fetch();
 	}, []);
@@ -80,7 +101,13 @@ const Routines = () => {
 														</TextCustom>
 													</ContainerFlexSameFlex>
 													<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
-														<Button $width={"100%"} $backgroundColor={"#fff"} $borderRadius={"8px"} style={{ zIndex: 9999, position: "relative" }}>
+														<Button
+															$width={"100%"}
+															$backgroundColor={"#fff"}
+															$borderRadius={"8px"}
+															style={{ zIndex: 9999, position: "relative" }}
+															onPress={() => addRoutines(el._id)}
+														>
 															<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
 																Add Routine
 															</TextCustom>
@@ -119,7 +146,13 @@ const Routines = () => {
 														</TextCustom>
 													</ContainerFlexSameFlex>
 													<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
-														<Button $width={"100%"} $backgroundColor={"#fff"} $borderRadius={"8px"} style={{ zIndex: 9999, position: "relative" }}>
+														<Button
+															onPress={() => addRoutines(el._id)}
+															$width={"100%"}
+															$backgroundColor={"#fff"}
+															$borderRadius={"8px"}
+															style={{ zIndex: 9999, position: "relative" }}
+														>
 															<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
 																Add Routine
 															</TextCustom>
@@ -157,7 +190,13 @@ const Routines = () => {
 														</TextCustom>
 													</ContainerFlexSameFlex>
 													<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
-														<Button $width={"100%"} $backgroundColor={"#fff"} $borderRadius={"8px"} style={{ zIndex: 9999, position: "relative" }}>
+														<Button
+															onPress={() => addRoutines(el._id)}
+															$width={"100%"}
+															$backgroundColor={"#fff"}
+															$borderRadius={"8px"}
+															style={{ zIndex: 9999, position: "relative" }}
+														>
 															<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
 																Add Routine
 															</TextCustom>
@@ -195,7 +234,13 @@ const Routines = () => {
 														</TextCustom>
 													</ContainerFlexSameFlex>
 													<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
-														<Button $width={"100%"} $backgroundColor={"#fff"} $borderRadius={"8px"} style={{ zIndex: 9999, position: "relative" }}>
+														<Button
+															onPress={() => addRoutines(el._id)}
+															$width={"100%"}
+															$backgroundColor={"#fff"}
+															$borderRadius={"8px"}
+															style={{ zIndex: 9999, position: "relative" }}
+														>
 															<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
 																Add Routine
 															</TextCustom>
