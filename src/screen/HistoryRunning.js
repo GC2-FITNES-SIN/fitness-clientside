@@ -28,17 +28,11 @@ const HistoryRunning = () => {
 		}
 	};
 
-	// useEffect(() => {
-	// 	fetchDataHistory();
-	// }, []);
-
 	useFocusEffect(
 		useCallback(() => {
 			fetchDataHistory();
 		}, [])
 	);
-
-	console.log(history, "<<<<<<<< |||");
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<ScrollView>
@@ -55,30 +49,22 @@ const HistoryRunning = () => {
 							return (
 								<>
 									<ContainerFlexSameFlex $padding={"15px"} $gap={"15px"} $borderRadius={"16px"} $backgroundColor={"#fff"} key={i}>
-										<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"} key={i}>
-											<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-												Durations
-											</TextCustom>
-											<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-												{convertTime(item.duration)}
-											</TextCustom>
-										</ContainerFlexSameFlex>
-										<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"} key={i}>
+										<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
 											<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
 												Distance
 											</TextCustom>
 											<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-												{roundNumber(item.distance)} KM
+												{roundNumber(item.distance)}
 											</TextCustom>
 										</ContainerFlexSameFlex>
-										<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"} key={i}>
+										{/* <ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
 											<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
 												Location
 											</TextCustom>
 											<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
 												XXXXX
 											</TextCustom>
-										</ContainerFlexSameFlex>
+										</ContainerFlexSameFlex> */}
 										<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
 											<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
 												Date
