@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Container, ContainerFlexSameFlex, ScrollView, TextCustom, TextInput } from "./Styled";
-import { SafeAreaView, Modal, View, TouchableOpacity } from "react-native";
+import { SafeAreaView, Modal, View, TouchableOpacity, ToastAndroid } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { Axios } from "../utils";
@@ -40,10 +40,13 @@ const Register = () => {
 					gender: selectedGender,
 				},
 			});
-
+			ToastAndroid.show("Register Success", ToastAndroid.SHORT);
 			navigate("Login");
 		} catch (error) {
-			console.log(error);
+			ToastAndroid.show(error.response.data.message, ToastAndroid.SHORT);
+			// for (let i in error) {
+			// 	console.log(i);
+			// }
 		}
 	};
 

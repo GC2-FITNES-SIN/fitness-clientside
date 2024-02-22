@@ -8,6 +8,7 @@ import * as Location from "expo-location";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import { useFocusEffect } from "@react-navigation/core";
 import { Axios } from "../utils";
+import * as SecureStore from "expo-secure-store";
 export default function Running() {
 	const [isRunning, setIsRunning] = useState(false);
 	const [location, setLocation] = useState([]);
@@ -36,6 +37,9 @@ export default function Running() {
 				method: "POST",
 				url: "/running-history",
 				data: body,
+				headers: {
+					Authorization: `Bearer ${SecureStore.getItem("access_token")}`,
+				},
 			});
 
 			console.log("success post");

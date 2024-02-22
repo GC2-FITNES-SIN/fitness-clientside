@@ -5,6 +5,7 @@ import * as SecureStore from "expo-secure-store";
 import { Axios, calculateBMI } from "../utils";
 import AuthContext from "../store/Auth";
 import { useNavigation } from "@react-navigation/native";
+import { ToastAndroid } from "react-native";
 
 const Login = () => {
 	const [email, setEmail] = useState();
@@ -30,7 +31,7 @@ const Login = () => {
 				setProfile(user);
 				setLogin(true);
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => ToastAndroid.show("Login Failed", ToastAndroid.SHORT));
 	};
 
 	return (

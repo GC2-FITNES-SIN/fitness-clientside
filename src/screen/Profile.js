@@ -18,7 +18,11 @@ const Profile = () => {
 		Axios({
 			url: "/user-routines",
 			method: "get",
+			headers: {
+				Authorization: "Bearer " + SecureStore.getItem("access_token"),
+			},
 		}).then((res) => {
+			console.log(res.data.routineData, "========== USER ROUTINES =========");
 			setUserRoutines(res.data);
 		});
 	}, []);
@@ -248,6 +252,45 @@ const Profile = () => {
 						$backgroundColor={"#252527"}
 					>
 						<TextCustom>Routines</TextCustom>
+						<ContainerFlexSameFlex $gap={"10px"}>
+							{userRoutines.routineData &&
+								userRoutines.routineData.map((el) => {
+									return (
+										<Button $backgroundColor="transparent" $padding={"0px"} key={i} onPress={() => navigation.navigate("DetailRoutine", { id: el._id })}>
+											<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} style={{ position: "relative", zIndex: 1 }} key={i}>
+												<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
+													<Image
+														source={{
+															uri: el.routineImageStart,
+														}}
+														style={{ width: "100%", height: "100%", objectFit: "fill" }}
+													/>
+												</ContainerFlexSameFlex>
+												<ContainerFlexSameFlex $column>
+													<ContainerFlexSameFlex $height={"50%"}>
+														<TextCustom $fontSize={"16px"} $fontWeight={"bold"} $color={"#bd54eb"}>
+															{el.routineName}
+														</TextCustom>
+													</ContainerFlexSameFlex>
+													<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
+														<Button
+															$width={"100%"}
+															$backgroundColor={"#fff"}
+															$borderRadius={"8px"}
+															style={{ zIndex: 9999, position: "relative" }}
+															onPress={() => addRoutines(el._id, el.routineName)}
+														>
+															<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
+																Add Routine
+															</TextCustom>
+														</Button>
+													</ContainerFlexSameFlex>
+												</ContainerFlexSameFlex>
+											</ContainerFlexSameFlex>
+										</Button>
+									);
+								})}
+						</ContainerFlexSameFlex>
 					</ContainerFlexSameFlex>
 
 					<Button
@@ -268,6 +311,7 @@ const Profile = () => {
 						onPress={async () => {
 							console.log("masuk");
 							SecureStore.deleteItemAsync("access_token");
+							SecureStore.deleteItemAsync("access_Token");
 							SecureStore.deleteItemAsync("profile");
 							SecureStore.deleteItemAsync("bmi");
 							setBmi();
