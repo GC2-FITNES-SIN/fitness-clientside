@@ -8,6 +8,7 @@ import * as Location from "expo-location";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import { useFocusEffect } from "@react-navigation/core";
 import { Axios } from "../utils";
+import * as SecureStore from "expo-secure-store";
 export default function Running() {
 	const [isRunning, setIsRunning] = useState(false);
 	const [location, setLocation] = useState([]);
@@ -30,12 +31,15 @@ export default function Running() {
 	const pushRunning = async () => {
 		try {
 			let body = { cordinates: location, duration: time };
-			body.cordinates.push({ latitude: 38.4220936, longitude: -121.7145457 });
+			// body.cordinates.push({ latitude: 38.4220936, longitude: -121.7145457 });
 			console.log("body running: ", body);
 			await Axios({
 				method: "POST",
 				url: "/running-history",
 				data: body,
+				headers: {
+					Authorization: `Bearer ${SecureStore.getItem("access_token")}`,
+				},
 			});
 
 			console.log("success post");
@@ -62,7 +66,7 @@ export default function Running() {
 					}
 					intervalLocation = setInterval(async () => {
 						const currLocation = await Location.getCurrentPositionAsync({});
-						console.log(currLocation);
+						console.log(currLocation, "===========================");
 
 						setLocation((prevValue) => {
 							return [...prevValue, { latitude: currLocation.coords.latitude, longitude: currLocation.coords.longitude }];

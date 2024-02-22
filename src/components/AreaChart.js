@@ -74,7 +74,7 @@ const AreaChart = (data) => {
 								}}
 							>
 								<Text style={{ color: "lightgray", fontSize: 12 }}>{items[0].date}</Text>
-								<Text style={{ color: "white", fontWeight: "bold" }}>{items[0].distance}</Text>
+								<Text style={{ color: "white", fontWeight: "bold" }}>{items[0].value}</Text>
 								<Text style={{ color: "white", fontWeight: "bold" }}>{items[0].duration}</Text>
 							</View>
 						);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, ContainerFlexSameFlex, ScrollView, TextCustom } from "./Styled";
-import { Image, TouchableOpacity } from "react-native";
+import { Image, ToastAndroid, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import axios from "axios";
@@ -40,7 +40,7 @@ const Routines = () => {
 		}
 	};
 
-	const addRoutines = async (id) => {
+	const addRoutines = async (id, name) => {
 		console.log("clicked", id);
 		try {
 			const data = await axios({
@@ -55,8 +55,10 @@ const Routines = () => {
 				},
 			});
 
+			ToastAndroid.show(`Success add routine ${name}`, ToastAndroid.SHORT);
 			console.log(data);
 		} catch (err) {
+			ToastAndroid.show(`Failed, ${name} already added`, ToastAndroid.SHORT);
 			console.log(err, "<<< error");
 		}
 	};
@@ -83,40 +85,38 @@ const Routines = () => {
 							</TextCustom>
 							{routinesCat.obesity.slice(0, 3).map((el, i) => {
 								return (
-									<>
-										<Button $backgroundColor="transparent" $padding={"0px"} key={i} onPress={() => navigation.navigate("DetailRoutine", { id: el._id })}>
-											<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} style={{ position: "relative", zIndex: 1 }}>
-												<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
-													<Image
-														source={{
-															uri: el.routineImageStart,
-														}}
-														style={{ width: "100%", height: "100%", objectFit: "fill" }}
-													/>
+									<Button $backgroundColor="transparent" $padding={"0px"} key={i} onPress={() => navigation.navigate("DetailRoutine", { id: el._id })}>
+										<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} style={{ position: "relative", zIndex: 1 }} key={i}>
+											<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
+												<Image
+													source={{
+														uri: el.routineImageStart,
+													}}
+													style={{ width: "100%", height: "100%", objectFit: "fill" }}
+												/>
+											</ContainerFlexSameFlex>
+											<ContainerFlexSameFlex $column>
+												<ContainerFlexSameFlex $height={"50%"}>
+													<TextCustom $fontSize={"16px"} $fontWeight={"bold"} $color={"#bd54eb"}>
+														{el.routineName}
+													</TextCustom>
 												</ContainerFlexSameFlex>
-												<ContainerFlexSameFlex $column>
-													<ContainerFlexSameFlex $height={"50%"}>
-														<TextCustom $fontSize={"16px"} $fontWeight={"bold"} $color={"#bd54eb"}>
-															{el.routineName}
+												<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
+													<Button
+														$width={"100%"}
+														$backgroundColor={"#fff"}
+														$borderRadius={"8px"}
+														style={{ zIndex: 9999, position: "relative" }}
+														onPress={() => addRoutines(el._id, el.routineName)}
+													>
+														<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
+															Add Routine
 														</TextCustom>
-													</ContainerFlexSameFlex>
-													<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
-														<Button
-															$width={"100%"}
-															$backgroundColor={"#fff"}
-															$borderRadius={"8px"}
-															style={{ zIndex: 9999, position: "relative" }}
-															onPress={() => addRoutines(el._id)}
-														>
-															<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
-																Add Routine
-															</TextCustom>
-														</Button>
-													</ContainerFlexSameFlex>
+													</Button>
 												</ContainerFlexSameFlex>
 											</ContainerFlexSameFlex>
-										</Button>
-									</>
+										</ContainerFlexSameFlex>
+									</Button>
 								);
 							})}
 						</ContainerFlexSameFlex>
@@ -128,40 +128,38 @@ const Routines = () => {
 							</TextCustom>
 							{routinesCat.overweight.slice(0, 3).map((el, i) => {
 								return (
-									<>
-										<Button $backgroundColor="transparent" $padding={"0px"} key={i} onPress={() => navigation.navigate("DetailRoutine", { id: el._id })}>
-											<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} style={{ position: "relative", zIndex: 1 }}>
-												<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
-													<Image
-														source={{
-															uri: el.routineImageStart,
-														}}
-														style={{ width: "100%", height: "100%", objectFit: "fill", zIndex: 10 }}
-													/>
+									<Button $backgroundColor="transparent" $padding={"0px"} key={i} onPress={() => navigation.navigate("DetailRoutine", { id: el._id })}>
+										<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} style={{ position: "relative", zIndex: 1 }} key={i}>
+											<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
+												<Image
+													source={{
+														uri: el.routineImageStart,
+													}}
+													style={{ width: "100%", height: "100%", objectFit: "fill", zIndex: 10 }}
+												/>
+											</ContainerFlexSameFlex>
+											<ContainerFlexSameFlex $column>
+												<ContainerFlexSameFlex $height={"50%"}>
+													<TextCustom $fontSize={"16px"} $fontWeight={"bold"} $color={"#bd54eb"}>
+														{el.routineName}
+													</TextCustom>
 												</ContainerFlexSameFlex>
-												<ContainerFlexSameFlex $column>
-													<ContainerFlexSameFlex $height={"50%"}>
-														<TextCustom $fontSize={"16px"} $fontWeight={"bold"} $color={"#bd54eb"}>
-															{el.routineName}
+												<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
+													<Button
+														onPress={() => addRoutines(el._id, el.routineName)}
+														$width={"100%"}
+														$backgroundColor={"#fff"}
+														$borderRadius={"8px"}
+														style={{ zIndex: 9999, position: "relative" }}
+													>
+														<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
+															Add Routine
 														</TextCustom>
-													</ContainerFlexSameFlex>
-													<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
-														<Button
-															onPress={() => addRoutines(el._id)}
-															$width={"100%"}
-															$backgroundColor={"#fff"}
-															$borderRadius={"8px"}
-															style={{ zIndex: 9999, position: "relative" }}
-														>
-															<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
-																Add Routine
-															</TextCustom>
-														</Button>
-													</ContainerFlexSameFlex>
+													</Button>
 												</ContainerFlexSameFlex>
 											</ContainerFlexSameFlex>
-										</Button>
-									</>
+										</ContainerFlexSameFlex>
+									</Button>
 								);
 							})}
 						</ContainerFlexSameFlex>
@@ -172,40 +170,38 @@ const Routines = () => {
 							</TextCustom>
 							{routinesCat.normal.slice(0, 3).map((el, i) => {
 								return (
-									<>
-										<Button $backgroundColor="transparent" $padding={"0px"} key={i} onPress={() => navigation.navigate("DetailRoutine", { id: el._id })}>
-											<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} style={{ position: "relative", zIndex: 1 }}>
-												<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
-													<Image
-														source={{
-															uri: el.routineImageStart,
-														}}
-														style={{ width: "100%", height: "100%", objectFit: "fill", zIndex: 10 }}
-													/>
+									<Button $backgroundColor="transparent" $padding={"0px"} key={i} onPress={() => navigation.navigate("DetailRoutine", { id: el._id })}>
+										<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} style={{ position: "relative", zIndex: 1 }} key={i}>
+											<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
+												<Image
+													source={{
+														uri: el.routineImageStart,
+													}}
+													style={{ width: "100%", height: "100%", objectFit: "fill", zIndex: 10 }}
+												/>
+											</ContainerFlexSameFlex>
+											<ContainerFlexSameFlex $column>
+												<ContainerFlexSameFlex $height={"50%"}>
+													<TextCustom $fontSize={"16px"} $fontWeight={"bold"} $color={"#bd54eb"}>
+														{el.routineName}
+													</TextCustom>
 												</ContainerFlexSameFlex>
-												<ContainerFlexSameFlex $column>
-													<ContainerFlexSameFlex $height={"50%"}>
-														<TextCustom $fontSize={"16px"} $fontWeight={"bold"} $color={"#bd54eb"}>
-															{el.routineName}
+												<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
+													<Button
+														onPress={() => addRoutines(el._id, el.routineName)}
+														$width={"100%"}
+														$backgroundColor={"#fff"}
+														$borderRadius={"8px"}
+														style={{ zIndex: 9999, position: "relative" }}
+													>
+														<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
+															Add Routine
 														</TextCustom>
-													</ContainerFlexSameFlex>
-													<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
-														<Button
-															onPress={() => addRoutines(el._id)}
-															$width={"100%"}
-															$backgroundColor={"#fff"}
-															$borderRadius={"8px"}
-															style={{ zIndex: 9999, position: "relative" }}
-														>
-															<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
-																Add Routine
-															</TextCustom>
-														</Button>
-													</ContainerFlexSameFlex>
+													</Button>
 												</ContainerFlexSameFlex>
 											</ContainerFlexSameFlex>
-										</Button>
-									</>
+										</ContainerFlexSameFlex>
+									</Button>
 								);
 							})}
 						</ContainerFlexSameFlex>
@@ -216,40 +212,38 @@ const Routines = () => {
 							</TextCustom>
 							{routinesCat.underweight.slice(0, 3).map((el, i) => {
 								return (
-									<>
-										<Button $backgroundColor="transparent" $padding={"0px"} key={i} onPress={() => navigation.navigate("DetailRoutine", { id: el._id })}>
-											<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} style={{ position: "relative", zIndex: 1 }}>
-												<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
-													<Image
-														source={{
-															uri: el.routineImageStart,
-														}}
-														style={{ width: "100%", height: "100%", objectFit: "fill", zIndex: 10 }}
-													/>
+									<Button $backgroundColor="transparent" $padding={"0px"} key={i} onPress={() => navigation.navigate("DetailRoutine", { id: el._id })}>
+										<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} style={{ position: "relative", zIndex: 1 }} key={i}>
+											<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
+												<Image
+													source={{
+														uri: el.routineImageStart,
+													}}
+													style={{ width: "100%", height: "100%", objectFit: "fill", zIndex: 10 }}
+												/>
+											</ContainerFlexSameFlex>
+											<ContainerFlexSameFlex $column>
+												<ContainerFlexSameFlex $height={"50%"}>
+													<TextCustom $fontSize={"16px"} $fontWeight={"bold"} $color={"#bd54eb"}>
+														{el.routineName}
+													</TextCustom>
 												</ContainerFlexSameFlex>
-												<ContainerFlexSameFlex $column>
-													<ContainerFlexSameFlex $height={"50%"}>
-														<TextCustom $fontSize={"16px"} $fontWeight={"bold"} $color={"#bd54eb"}>
-															{el.routineName}
+												<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
+													<Button
+														onPress={() => addRoutines(el._id, el.routineName)}
+														$width={"100%"}
+														$backgroundColor={"#fff"}
+														$borderRadius={"8px"}
+														style={{ zIndex: 9999, position: "relative" }}
+													>
+														<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
+															Add Routine
 														</TextCustom>
-													</ContainerFlexSameFlex>
-													<ContainerFlexSameFlex $height={"50%"} $justifyContent={"center"} $alignItems={"center"} $gap={"5px"} $padding={"0px 10px 0px 10px"}>
-														<Button
-															onPress={() => addRoutines(el._id)}
-															$width={"100%"}
-															$backgroundColor={"#fff"}
-															$borderRadius={"8px"}
-															style={{ zIndex: 9999, position: "relative" }}
-														>
-															<TextCustom $color={"#000"} $fontSize={"12px"} $fontWeight={"bold"}>
-																Add Routine
-															</TextCustom>
-														</Button>
-													</ContainerFlexSameFlex>
+													</Button>
 												</ContainerFlexSameFlex>
 											</ContainerFlexSameFlex>
-										</Button>
-									</>
+										</ContainerFlexSameFlex>
+									</Button>
 								);
 							})}
 						</ContainerFlexSameFlex>

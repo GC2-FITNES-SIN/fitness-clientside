@@ -1,27 +1,47 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Button, Container, ContainerFlexSameFlex, ProfileRounded, ScrollView, TextCustom } from "./Styled";
 import * as SecureStore from "expo-secure-store";
 import { Image, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AuthContext from "../store/Auth";
 import { Axios } from "../utils";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Profile = () => {
 	const [userRoutines, setUserRoutines] = useState([]);
 
 	const { profile, setProfile, bmi, setLogin, setBmi } = useContext(AuthContext);
 	const pressHandler = () => {
-		console.log("touch");
+		console.log("touchhh");
 	};
 
-	useEffect(() => {
-		Axios({
-			url: "/user-routines",
-			method: "get",
-		}).then((res) => {
-			setUserRoutines(res.data);
-		});
-	}, []);
+	// useEffect(() => {
+	// 	Axios({
+	// 		url: "/user-routines",
+	// 		method: "get",
+	// 		headers: {
+	// 			Authorization: "Bearer " + SecureStore.getItem("access_token"),
+	// 		},
+	// 	}).then((res) => {
+	// 		// console.log(res.data, "========== USER ROUTINES =========", res.data[0].routineData);
+	// 		setUserRoutines(res.data[0].routineData);
+	// 	});
+	// }, []);
+
+	useFocusEffect(
+		useCallback(() => {
+			Axios({
+				url: "/user-routines",
+				method: "get",
+				headers: {
+					Authorization: "Bearer " + SecureStore.getItem("access_token"),
+				},
+			}).then((res) => {
+				// console.log(res.data, "========== USER ROUTINES =========", res.data[0].routineData);
+				setUserRoutines(res.data[0].routineData);
+			});
+		}, [])
+	);
 
 	console.log(userRoutines, "<<<<<<<<<<<<");
 
@@ -138,10 +158,13 @@ const Profile = () => {
 						$padding={"25px"}
 					>
 						<TextCustom $fontSize={"17.5px"} $fontWeight={"bold"} $textAlign={"left"}>
-							Overweight
+							{bmi.result}
 						</TextCustom>
 						<ContainerFlexSameFlex $justifyContent={"center"}>
-							<Image source={require("../../assets/obes.png")} style={{ width: 100, height: 100, objectFit: "contain" }} />
+							{bmi.result == "Obese" && <Image source={require("../../assets/obes.png")} style={{ width: 100, height: 100, objectFit: "contain" }} />}
+							{bmi.result == "Overweight" && <Image source={require("../../assets/Overweight.png")} style={{ width: 100, height: 100, objectFit: "contain" }} />}
+							{bmi.result == "Normal" && <Image source={require("../../assets/Normal.png")} style={{ width: 100, height: 100, objectFit: "contain" }} />}
+							{bmi.result == "Underweight" && <Image source={require("../../assets/obes.png")} style={{ width: 100, height: 100, objectFit: "contain" }} />}
 						</ContainerFlexSameFlex>
 						<ContainerFlexSameFlex $column $gap={"10px"} $justifyContent={"center"}>
 							<TextCustom>Your ideal weight :</TextCustom>
@@ -225,6 +248,57 @@ const Profile = () => {
 							</TextCustom>
 						</ContainerFlexSameFlex>
 					</ContainerFlexSameFlex>
+
+					<ContainerFlexSameFlex
+						style={{
+							shadowColor: "#000",
+							shadowOffset: {
+								width: 0,
+								height: 1,
+							},
+							shadowOpacity: 0.22,
+							shadowRadius: 2.22,
+							elevation: 3,
+							marginTop: 10,
+							marginBottom: 10,
+						}}
+						$column
+						$borderRadius={"16px"}
+						$padding={"25px"}
+						$backgroundColor={"#252527"}
+					>
+						<TextCustom $fontSize={"20px"} $fontWeight={"bold"}>
+							Routines
+						</TextCustom>
+						<ContainerFlexSameFlex $gap={"10px"} $column>
+							{userRoutines &&
+								userRoutines.map((el, i) => {
+									console.log(el, "el ==========");
+									return (
+										<Button $backgroundColor="transparent" $padding={"0px"} key={i} onPress={() => navigation.navigate("DetailRoutine", { id: el._id })}>
+											<ContainerFlexSameFlex $borderRadius={"16px"} $flex={"1"} style={{ position: "relative", zIndex: 1 }} $column key={i}>
+												<ContainerFlexSameFlex $flex={"1"} $height={"150px"} $padding={"0px"} $borderRadius={"16px"} style={{ overflow: "hidden" }}>
+													<Image
+														source={{
+															uri: el.routineImageStart,
+														}}
+														style={{ width: "100%", height: "100%", objectFit: "fill" }}
+													/>
+												</ContainerFlexSameFlex>
+												<ContainerFlexSameFlex $column>
+													<ContainerFlexSameFlex $height={"50%"}>
+														<TextCustom $fontSize={"16px"} $fontWeight={"normal"}>
+															{el.routineName}
+														</TextCustom>
+													</ContainerFlexSameFlex>
+												</ContainerFlexSameFlex>
+											</ContainerFlexSameFlex>
+										</Button>
+									);
+								})}
+						</ContainerFlexSameFlex>
+					</ContainerFlexSameFlex>
+
 					<Button
 						$borderRadius={"50px"}
 						$backgroundColor={"#bd54eb"}
@@ -243,6 +317,7 @@ const Profile = () => {
 						onPress={async () => {
 							console.log("masuk");
 							SecureStore.deleteItemAsync("access_token");
+							SecureStore.deleteItemAsync("access_Token");
 							SecureStore.deleteItemAsync("profile");
 							SecureStore.deleteItemAsync("bmi");
 							setBmi();
