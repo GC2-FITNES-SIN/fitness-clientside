@@ -54,6 +54,7 @@ export default function Running() {
 			let intervalLocation, intervalTime;
 			if (status == "granted") {
 				if (isRunning) {
+					setTime(0);
 					console.log("masuk granted scope true: ", intervalLocation, isRunning, "============", location.length);
 					if (location.length === 0) {
 						Location.getCurrentPositionAsync({}).then((res) => {
@@ -97,7 +98,7 @@ export default function Running() {
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<Container $padding={"15px"} $backgroundColor={"#1b1b1d"}>
-				{!isRunning && location.length != 0 && (
+				{isRunning && location.length != 0 && (
 					<ContainerFlexSameFlex
 						$column
 						$justifyContent={"center"}
@@ -117,7 +118,7 @@ export default function Running() {
 						$borderRadius={"16px"}
 					>
 						<TextCustom $color={"#bd54eb"} $fontSize={"40px"} $fontWeight={"bold"}>
-							15:43:02
+							{new Date(time * 1000).toISOString().substr(11, 8)}
 						</TextCustom>
 						<TextCustom $fontSize={"15px"} $color={"#bd54eb"}>
 							duration
