@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import MapView from "react-native-maps";
+import MapView, { Polyline } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -159,6 +159,7 @@ export default function Running() {
 							strokeColor="hotPink"
 							strokeWidth={3}
 						/> */}
+						<Polyline coordinates={location} strokeColor="#bd54eb" strokeWidth={3} />
 					</MapView>
 				</ContainerFlexSameFlex>
 				{!isRunning && location.length != 0 && (
