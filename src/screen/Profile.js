@@ -1,17 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Container, ContainerFlexSameFlex, ProfileRounded, ScrollView, TextCustom } from "./Styled";
 import * as SecureStore from "expo-secure-store";
 import { Image, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AuthContext from "../store/Auth";
+import { Axios } from "../utils";
 
 const Profile = () => {
+	const [userRoutines, setUserRoutines] = useState([]);
+
 	const { profile, setProfile, bmi, setLogin, setBmi } = useContext(AuthContext);
 	const pressHandler = () => {
 		console.log("touch");
 	};
 
-	console.log(profile, "<<< profile screen", bmi, "<<< bmi", typeof bmi);
+	useEffect(() => {
+		Axios({
+			url: "/user-routines",
+			method: "get",
+		}).then((res) => {
+			setUserRoutines(res.data);
+		});
+	}, []);
+
+	console.log(userRoutines, "<<<<<<<<<<<<");
 
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
