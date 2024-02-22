@@ -141,7 +141,10 @@ const Profile = () => {
 							Overweight
 						</TextCustom>
 						<ContainerFlexSameFlex $justifyContent={"center"}>
-							<Image source={require("../../assets/obes.png")} style={{ width: 100, height: 100, objectFit: "contain" }} />
+							{bmi.result == "Obesity" && <Image source={require("../../assets/obes.png")} style={{ width: 100, height: 100, objectFit: "contain" }} />}
+							{bmi.result == "Overweight" && <Image source={require("../../assets/Overweight.png")} style={{ width: 100, height: 100, objectFit: "contain" }} />}
+							{bmi.result == "Normal" && <Image source={require("../../assets/Normal.png")} style={{ width: 100, height: 100, objectFit: "contain" }} />}
+							{bmi.result == "Underweight" && <Image source={require("../../assets/obes.png")} style={{ width: 100, height: 100, objectFit: "contain" }} />}
 						</ContainerFlexSameFlex>
 						<ContainerFlexSameFlex $column $gap={"10px"} $justifyContent={"center"}>
 							<TextCustom>Your ideal weight :</TextCustom>
@@ -225,6 +228,28 @@ const Profile = () => {
 							</TextCustom>
 						</ContainerFlexSameFlex>
 					</ContainerFlexSameFlex>
+
+					<ContainerFlexSameFlex
+						style={{
+							shadowColor: "#000",
+							shadowOffset: {
+								width: 0,
+								height: 1,
+							},
+							shadowOpacity: 0.22,
+							shadowRadius: 2.22,
+							elevation: 3,
+							marginTop: 10,
+							marginBottom: 10,
+						}}
+						$column
+						$borderRadius={"16px"}
+						$padding={"25px"}
+						$backgroundColor={"#252527"}
+					>
+						<TextCustom>Routines</TextCustom>
+					</ContainerFlexSameFlex>
+
 					<Button
 						$borderRadius={"50px"}
 						$backgroundColor={"#bd54eb"}

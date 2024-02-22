@@ -30,7 +30,7 @@ export default function Running() {
 	const pushRunning = async () => {
 		try {
 			let body = { cordinates: location, duration: time };
-			body.cordinates.push({ latitude: 38.4220936, longitude: -121.7145457 });
+			// body.cordinates.push({ latitude: 38.4220936, longitude: -121.7145457 });
 			console.log("body running: ", body);
 			await Axios({
 				method: "POST",
@@ -62,7 +62,7 @@ export default function Running() {
 					}
 					intervalLocation = setInterval(async () => {
 						const currLocation = await Location.getCurrentPositionAsync({});
-						console.log(currLocation);
+						console.log(currLocation, "===========================");
 
 						setLocation((prevValue) => {
 							return [...prevValue, { latitude: currLocation.coords.latitude, longitude: currLocation.coords.longitude }];

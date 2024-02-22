@@ -3,6 +3,7 @@ import { Button, Container, ContainerFlexSameFlex, ScrollView, TextCustom, TextI
 import { SafeAreaView, Modal, View, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import { Axios } from "../utils";
 
 const Register = () => {
 	const navigation = useNavigation();
@@ -26,17 +27,21 @@ const Register = () => {
 			// 	{ headers: { "Content-Type": "application/x-www-form-urlencoded" } }
 			// );
 
-			const data = await fetch("http://192.168.100.78/register", {
+			const data = await Axios({
+				url: "/register",
 				method: "POST",
-				headers: {
-					"Content-Type": "application/x-www-form-urlencoded",
+				data: {
+					username,
+					email,
+					password,
+					weight,
+					height,
+					age,
+					gender: selectedGender,
 				},
-				body: `username=${username}&email=${email}&password=${password}&weight=${weight}&height=${height}&age=${age}&selectedGender=${selectedGender}`,
-			}).then((res) => res.json());
+			});
 
-			console.log(data, "<<<<");
-
-			// navigation("Login")
+			navigate("Login");
 		} catch (error) {
 			console.log(error);
 		}
@@ -45,14 +50,14 @@ const Register = () => {
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<Container $padding={"15px"} $backgroundColor={"#1b1b1d"}>
-					<TextCustom $fontSize={"20px"} $color={"white"} $margin={"20px 0px 0px 0px"}>
-						Hey there,
-					</TextCustom>
-					<TextCustom $fontWeight={"700"} $fontSize={"20px"} $color={"white"} $margin={"0px 0px 30px 0px"}>
-						Create an Account
-					</TextCustom>
+				<TextCustom $fontSize={"20px"} $color={"white"} $margin={"20px 0px 0px 0px"}>
+					Hey there,
+				</TextCustom>
+				<TextCustom $fontWeight={"700"} $fontSize={"20px"} $color={"white"} $margin={"0px 0px 30px 0px"}>
+					Create an Account
+				</TextCustom>
 				<ScrollView>
-					<ContainerFlexSameFlex $column $gap={"10px"} $justifyContent={"center"}  $padding={"0px"}>
+					<ContainerFlexSameFlex $column $gap={"10px"} $justifyContent={"center"} $padding={"0px"}>
 						<ContainerFlexSameFlex>
 							<TextInput
 								value={username}
