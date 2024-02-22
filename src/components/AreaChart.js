@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { LineChart } from "react-native-gifted-charts";
-import { roundNumber } from "../utils";
+import { convertTime, roundNumber } from "../utils";
 
 const AreaChart = (data) => {
 	const data1 = [
@@ -16,9 +16,9 @@ const AreaChart = (data) => {
 	const dataConvert = data.data.map((el, i) => {
 		console.log(el);
 		return {
-			date: `${new Date(el.createdAt).toLocaleString("default", { month: "short" })}-${new Date(el.createdAt).getDate()}`,
-			duration: +el.duration,
-			value: roundNumber(el.distance),
+			date: `${new Date(el.createdAt).toLocaleString("default", { month: "short" })}`,
+			value: +el.duration,
+			duration: convertTime(el.duration),
 		};
 	});
 
@@ -35,7 +35,7 @@ const AreaChart = (data) => {
 				data={dataConvert}
 				hideDataPoints
 				spacing={68}
-				color1="#8a56ce"
+				color1="#fff"
 				color2="#56acce"
 				startFillColor1="#8a56ce"
 				startFillColor2="#56acce"
@@ -73,9 +73,9 @@ const AreaChart = (data) => {
 									paddingLeft: 16,
 								}}
 							>
-								<Text style={{ color: "lightgray", fontSize: 12 }}>{items[0].date}</Text>
-								<Text style={{ color: "white", fontWeight: "bold" }}>{items[0].value}</Text>
-								<Text style={{ color: "white", fontWeight: "bold" }}>{items[0].duration}</Text>
+								<Text style={{ color: "black", fontSize: 12 }}>{items[0].date}</Text>
+								<Text style={{ color: "black", fontWeight: "bold" }}>Duration: {items[0].value}</Text>
+								{/* <Text style={{ color: "black", fontWeight: "bold" }}>{items[0].duration}</Text> */}
 							</View>
 						);
 					},

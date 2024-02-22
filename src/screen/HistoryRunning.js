@@ -57,14 +57,14 @@ const HistoryRunning = () => {
 												{roundNumber(item.distance)}
 											</TextCustom>
 										</ContainerFlexSameFlex>
-										{/* <ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
+										<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
 											<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
-												Location
+												Duration
 											</TextCustom>
 											<TextCustom $fontSize={"10px"} $color={"black"} $textAlign={"left"}>
-												XXXXX
+												{convertTime(item.duration)}
 											</TextCustom>
-										</ContainerFlexSameFlex> */}
+										</ContainerFlexSameFlex>
 										<ContainerFlexSameFlex $column $height={"100%"} $gap={"10px"} $alignItems={"center"} $justifyContent={"space-between"}>
 											<TextCustom $fontSize={"12.5px"} $fontWeight={"bold"} $textAlign={"left"} $color={"#bd54eb"}>
 												Date
